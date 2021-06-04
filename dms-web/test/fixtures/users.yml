@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+back_office_user:
+  email: backoffice.user@company.com
+  mobile_number: 0820000001
+  password_digest: <%= BCrypt::Password.create('password') %>
+  first_name: Backoffice
+  surname: User
+  deleted_at: 2021-06-04 08:20:56
+
+sales_agent_1:
+  email: agent.user.1@company.com
+  mobile_number: 0820000002
+  password_digest: <%= BCrypt::Password.create('password') %>
+  first_name: Sales
+  surname: Agent 1
+  deleted_at: 2021-06-04 08:20:56
