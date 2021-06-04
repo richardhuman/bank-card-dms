@@ -5,7 +5,7 @@ class CreateCards < ActiveRecord::Migration[6.1]
     create_table :cards do |t|
       t.string :card_number, null: false
       t.references :bundle, null: false, foreign_key: { to_table: :card_bundles }
-      t.integer :status, null: false
+      t.integer :status, null: false, default: 1
       t.timestamp :sold_at
 
       t.timestamps

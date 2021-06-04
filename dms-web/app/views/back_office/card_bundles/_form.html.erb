@@ -1,0 +1,37 @@
+<%= form_with(model: [:back_office, card_bundle], local: true) do |form| %>
+  <% if card_bundle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(card_bundle.errors.count, "error") %> prohibited this card bundle from being saved:</h2>
+
+      <ul>
+        <% card_bundle.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :bundle_number %>
+    <%= form.text_field :bundle_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :card_quantity %>
+    <%= form.text_field :card_quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_assignee %>
+    <%= form.collection_select :current_assignee_id, @agents, :id, :full_name_with_identifier, { prompt: "" }  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parent_bundle %>
+    <%= form.collection_select :parent_bundle_id, @available_parent_bundles, :id, :bundle_number, { prompt: "" }  %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

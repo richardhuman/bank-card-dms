@@ -5,6 +5,16 @@ class User < ApplicationRecord
 
   validate :at_least_one_identifier
 
+  scope :active, ->() { where(deleted_at: nil) }
+
+  def full_name_with_identifier
+    "#{first_name} #{surname} [#{identifier}]"
+  end
+
+  def identifier
+    !mobile_number.blank? ? mobile_number : email
+  end
+
   private
     def at_least_one_identifier
       if self.mobile_number.blank? && self.email.blank?

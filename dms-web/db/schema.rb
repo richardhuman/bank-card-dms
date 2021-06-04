@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_06_04_072422) do
 
-  create_table "barcode_symbologies", charset: "utf8mb4", force: :cascade do |t|
+  create_table "barcode_symbologies", charset: "utf8", force: :cascade do |t|
     t.string "code", null: false
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_072422) do
     t.index ["name"], name: "index_barcode_symbologies_on_name", unique: true
   end
 
-  create_table "card_bundle_transactions", charset: "utf8mb4", force: :cascade do |t|
+  create_table "card_bundle_transactions", charset: "utf8", force: :cascade do |t|
     t.bigint "card_bundle_id", null: false
     t.integer "transaction_type"
     t.bigint "src_id", null: false
@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(version: 2021_06_04_072422) do
     t.index ["src_id"], name: "index_card_bundle_transactions_on_src_id"
   end
 
-  create_table "card_bundles", charset: "utf8mb4", force: :cascade do |t|
+  create_table "card_bundles", charset: "utf8", force: :cascade do |t|
     t.string "bundle_number", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 1, null: false
     t.integer "card_quantity", null: false
     t.bigint "current_assignee_id", null: false
     t.bigint "loaded_by_id"
@@ -51,10 +51,10 @@ ActiveRecord::Schema.define(version: 2021_06_04_072422) do
     t.index ["parent_bundle_id"], name: "index_card_bundles_on_parent_bundle_id"
   end
 
-  create_table "cards", charset: "utf8mb4", force: :cascade do |t|
+  create_table "cards", charset: "utf8", force: :cascade do |t|
     t.string "card_number", null: false
     t.bigint "bundle_id", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 1, null: false
     t.timestamp "sold_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_072422) do
     t.index ["card_number"], name: "index_cards_on_card_number", unique: true
   end
 
-  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "email"
     t.string "mobile_number"
     t.string "password_digest", null: false
@@ -80,5 +80,6 @@ ActiveRecord::Schema.define(version: 2021_06_04_072422) do
   add_foreign_key "card_bundle_transactions", "users", column: "src_id"
   add_foreign_key "card_bundles", "users", column: "current_assignee_id"
   add_foreign_key "card_bundles", "users", column: "loaded_by_id"
+  add_foreign_key "card_bundles", "users", column: "parent_bundle_id"
   add_foreign_key "cards", "card_bundles", column: "bundle_id"
 end
