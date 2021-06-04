@@ -1,0 +1,17 @@
+bin
+config
+db
+lib
+log
+test
+tmp
+vendor
+
+app/assets
+app/channels
+app/controllers
+app/helpers
+app/jobs
+app/mailers
+app/models
+app/views
