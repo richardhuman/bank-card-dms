@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bundle_number: MyString
+  current_assignee: one
+  loaded_by: one
+  loaded_at: 2021-06-04 08:53:48
+
+two:
+  bundle_number: MyString
+  current_assignee: two
+  loaded_by: two
+  loaded_at: 2021-06-04 08:53:48

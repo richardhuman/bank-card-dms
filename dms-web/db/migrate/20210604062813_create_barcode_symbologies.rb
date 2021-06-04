@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class CreateBarcodeSymbologies < ActiveRecord::Migration[6.1]
   def change
     create_table :barcode_symbologies do |t|
-      t.string :code
-      t.string :name
+      t.string :code, null: false
+      t.string :name, null: false
 
       t.timestamps
     end

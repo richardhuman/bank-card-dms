@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  card_number: MyString
+  bundle: one
+  status: 
+  sold_at: 2021-06-04 08:59:18
+
+two:
+  card_number: MyString
+  bundle: two
+  status: 
+  sold_at: 2021-06-04 08:59:18
