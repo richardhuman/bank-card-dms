@@ -38,14 +38,17 @@ $ brew link node@16 # this may not be necessary
 $ brew install yarn
 ````
 
-Check version:
+Check versions:
 
 ````
 $ node -v
 v16.3.0
-➜  dms-web git:(main) ✗ yarn -v
+$ yarn -v
 1.22.10
 ````
 
-$ bin/bundle install
+Install all application library dependancies
 
+````
+$ bin/bundle install
+````
