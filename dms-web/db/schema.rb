@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_062056) do
+ActiveRecord::Schema.define(version: 2021_06_04_062813) do
+
+  create_table "barcode_symbologies", charset: "utf8mb4", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["code"], name: "index_barcode_symbologies_on_code", unique: true
+    t.index ["name"], name: "index_barcode_symbologies_on_name", unique: true
+  end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email"
