@@ -11,4 +11,11 @@ BarcodeSymbology.where(code: BarcodeSymbology::EAN_13).first_or_create!(name: "E
 
 User.where(email: "backoffice@company.com", mobile_number: "0820000001").
   first_or_create!(first_name: "Back", surname: "Office",
-                   password: "password", password_confirmation: "password")
+                   password: "password", password_confirmation: "password",
+                   user_role: :back_office)
+
+User.where(email: "sales_agent@company.com", mobile_number: "0820000002").
+  first_or_create!(first_name: "Sales", surname: "Agent",
+                   password: "password", password_confirmation: "password",
+                   user_role: :sales_agent)
+

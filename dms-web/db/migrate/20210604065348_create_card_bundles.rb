@@ -6,7 +6,7 @@ class CreateCardBundles < ActiveRecord::Migration[6.1]
       t.string :bundle_number, null: false
       t.integer :status, null: false, default: 1
       t.integer :card_quantity, null: false
-      t.references :current_assignee, null: false, foreign_key: { to_table: :users }
+      t.references :current_assignee, null: true, foreign_key: { to_table: :users }
       t.references :loaded_by, foreign_key: { to_table: :users }
       t.timestamp :loaded_at
 

@@ -30,4 +30,50 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  main_menu:
+    home: Home
+    campaigns: Campaigns
+    bundles: Bundles
+    agents: Agents
+    account: Account
+    account_settings: Settings
+    account_logout: Logout
+
+  user_logins:
+    header: Login
+    form:
+      username_placeholder: Mobile number or email
+      password_placeholder: Password
+      submit: Login
+
+  errors:
+    login:
+      failed: The user could not be found by either email or mobile number or the password was incorrect.
+      not_active: The user is no longer active.
+
+  activerecord:
+    models:
+      card_bundle: Card bundle
+    attributes:
+      card_bundle:
+        bundle_number: Bundle number
+        status: Status
+        card_quantity: Quantity of cards
+        current_assignee: Current agent
+        loaded_by: Loaded by
+        parent_bundle: Parent bundle
+
+  forms:
+    shared:
+      actions:
+        cancel: Cancel
+    card_bundle:
+      actions:
+        create: Add bundle
+        edit: Add bundle
+
+#  helpers:
+#    label:
+#      user_logins:
+#        username: Mobile number or email
+#        password: Password

@@ -1,30 +1,35 @@
-<h1>BackOffice::Bundles#index</h1>
-<p>Find me in app/views/back_office/bundles/index.html.erb</p>
+<div class="docs-section">
+    <h6 class="docs-header"><%= t("main_menu.bundles") %></h6>
 
-<p id="notice"><%= notice %></p>
-
-<h1>card_bundles</h1>
-
-<table>
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th colspan="3"></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @card_bundles.each do |card_bundle| %>
+    <table class="u-full-width">
+        <thead>
         <tr>
-            <td><%= card_bundle.bundle_number %></td>
-            <td><%= link_to 'Show', [:back_office, card_bundle] %></td>
-            <td><%= link_to 'Edit', edit_back_office_card_bundle_path(card_bundle) %></td>
-            <td><%= link_to 'Destroy', [:back_office, card_bundle], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <th>Bundle number</th>
+            <th>Status</th>
+            <th>Quantity</th>
+            <th>Loaded by</th>
+            <th>Current assignee</th>
+            <th colspan="3"></th>
         </tr>
-    <% end %>
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+        <% @card_bundles.each do |card_bundle| %>
+            <tr>
+                <td><%= card_bundle.bundle_number %></td>
+                <td><%= card_bundle.status.humanize %></td>
+                <td><%= card_bundle.card_quantity %></td>
+                <td><%= card_bundle.loaded_by&.full_name %></td>
+                <td><%= card_bundle.current_assignee&.full_name %></td>
+                <td><%= link_to 'Show', [:back_office, card_bundle] %></td>
+                <td><%= link_to 'Edit', edit_back_office_card_bundle_path(card_bundle) %></td>
+                <td><%= link_to 'Destroy', [:back_office, card_bundle], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
 
 <br>
 
-<%= link_to 'New Card bundle', new_back_office_card_bundle_path %>
+<%= link_to 'New Card bundle', new_back_office_card_bundle_path, class: "button button-primary" %>

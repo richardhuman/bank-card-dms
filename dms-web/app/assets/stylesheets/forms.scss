@@ -1,0 +1,26 @@
+$color_error: red;
+.notice {
+    background-color: lightgray;
+    padding: 20px;
+}
+
+form {
+    .field_with_errors {
+        padding: 2px;
+        display: inline;
+
+        input {
+            border-color: $color_error
+        }
+    }
+
+    .errors_notification {
+        color: $color_error;
+        ul {
+            li {
+                line-height: 1
+            }
+        }
+
+    }
+}

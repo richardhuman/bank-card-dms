@@ -12,3 +12,9 @@
 // ActiveStorage.start();
 
 // import "controllers";
+
+import { Navbar } from "../shared/nav_bar";
+
+document.addEventListener("DOMContentLoaded", () => {
+  new Navbar().init();
+});

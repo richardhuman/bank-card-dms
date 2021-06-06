@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>DmsWeb</title>
+<head>
+    <title><%= get_application_name %></title>
+    <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-  <body>
-    <%= yield %>
-  </body>
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="navbar-spacer"></div>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="navbar-list">
+                <li class="navbar-item"><%= link_to t("main_menu.home"), "/", { class: "navbar-link" } %></li>
+                <% if current_user %>
+                    <li class="navbar-item"><%= link_to t("main_menu.campaigns"), "/", class: "navbar-link" %></li>
+                    <li class="navbar-item"><%= link_to t("main_menu.bundles"), back_office_card_bundles_path, class: "navbar-link" %></li>
+                    <li class="navbar-item"><%= link_to t("main_menu.agents"), "/", class: "navbar-link" %></li>
+                    <li class="navbar-item">
+                        <%= link_to t("main_menu.account"), "#", class: "navbar-link popover-trigger", data: { popover: "navbar-account-popover" } %>
+                        <div id="navbar-account-popover" class="popover">
+                            <ul class="popover-list">
+                                <li class="popover-item"><%= link_to t("main_menu.account_settings"), "#", class: "popover-link" %></li>
+                                <li class="popover-item"><%= link_to t("main_menu.account_logout"), "/logout", class: "popover-link" %></li>
+                            </ul>
+                        </div>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+    </nav>
+    <% if notice %>
+        <div class="row">
+            <p id="notice"><%= notice %></p>
+        </div>
+    <% end %>
+    <div class="row">
+        <%= yield %>
+    </div>
+</div>
+
+</body>
 </html>

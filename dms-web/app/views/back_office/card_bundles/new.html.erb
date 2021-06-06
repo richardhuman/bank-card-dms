@@ -1,8 +1,8 @@
-<h1>BackOffice::Bundles#new</h1>
-<p>Find me in app/views/back_office/bundles/new.html.erb</p>
 
-<h1>New Card Bundle</h1>
+<div class="docs-section">
+    <h6 class="docs-header"><%= t("main_menu.bundles") %></h6>
+    <%= render "form", card_bundle: @card_bundle %>
+</div>
 
-<%= render 'form', card_bundle: @card_bundle %>
 
-<%= link_to 'Back', back_office_card_bundles_path %>
+<%= link_to "Back", back_office_card_bundles_path %>
