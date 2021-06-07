@@ -24,15 +24,17 @@ ActiveRecord::Schema.define(version: 2021_06_07_075013) do
   create_table "card_bundle_transactions", charset: "utf8", force: :cascade do |t|
     t.bigint "card_bundle_id", null: false
     t.integer "transaction_type"
-    t.bigint "src_id", null: false
-    t.bigint "dest_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "transferrer_id"
+    t.bigint "transferee_id"
     t.integer "card_quantity"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["card_bundle_id"], name: "index_card_bundle_transactions_on_card_bundle_id"
-    t.index ["dest_id"], name: "index_card_bundle_transactions_on_dest_id"
-    t.index ["src_id"], name: "index_card_bundle_transactions_on_src_id"
+    t.index ["transferee_id"], name: "index_card_bundle_transactions_on_transferee_id"
+    t.index ["transferrer_id"], name: "index_card_bundle_transactions_on_transferrer_id"
+    t.index ["user_id"], name: "index_card_bundle_transactions_on_user_id"
   end
 
   create_table "card_bundles", charset: "utf8", force: :cascade do |t|
@@ -82,8 +84,9 @@ ActiveRecord::Schema.define(version: 2021_06_07_075013) do
   end
 
   add_foreign_key "card_bundle_transactions", "card_bundles"
-  add_foreign_key "card_bundle_transactions", "users", column: "dest_id"
-  add_foreign_key "card_bundle_transactions", "users", column: "src_id"
+  add_foreign_key "card_bundle_transactions", "users"
+  add_foreign_key "card_bundle_transactions", "users", column: "transferee_id"
+  add_foreign_key "card_bundle_transactions", "users", column: "transferrer_id"
   add_foreign_key "card_bundles", "users", column: "current_assignee_id"
   add_foreign_key "card_bundles", "users", column: "deleted_by_id"
   add_foreign_key "card_bundles", "users", column: "loaded_by_id"

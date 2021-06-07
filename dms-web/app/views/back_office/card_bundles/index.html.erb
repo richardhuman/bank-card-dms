@@ -4,11 +4,12 @@
     <table class="u-full-width">
         <thead>
         <tr>
-            <th>Bundle number</th>
-            <th>Status</th>
-            <th>Quantity</th>
-            <th>Loaded by</th>
-            <th>Current assignee</th>
+            <th><%= t("activerecord.attributes.card_bundle.bundle_number") %></th>
+            <th><%= t("activerecord.attributes.card_bundle.status") %></th>
+            <th><%= t("activerecord.attributes.card_bundle.card_quantity") %></th>
+            <th><%= t("activerecord.attributes.card_bundle.loaded_at") %></th>
+            <th><%= t("activerecord.attributes.card_bundle.loaded_by") %></th>
+            <th><%= t("activerecord.attributes.card_bundle.current_assignee") %></th>
             <th></th>
         </tr>
         </thead>
@@ -19,6 +20,7 @@
                 <td><%= card_bundle.bundle_number %></td>
                 <td><%= card_bundle.status.humanize %></td>
                 <td><%= card_bundle.card_quantity %></td>
+                <td><%= card_bundle.created_at.to_formatted_s(:timestamp) %></td>
                 <td><%= card_bundle.loaded_by&.first_name %></td>
                 <td><%= card_bundle.current_assignee&.first_name %></td>
                 <td><%= link_to 'Edit', edit_back_office_card_bundle_path(card_bundle) %></td>

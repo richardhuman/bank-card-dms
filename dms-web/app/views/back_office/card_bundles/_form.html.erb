@@ -3,21 +3,25 @@
     <%= render "/shared/form_errors", active_model_object: card_bundle %>
 
     <div>
+        <%= form.label :bundle_number %>
         <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.card_bundle.bundle_number") %>
     </div>
 
     <div>
+        <%= form.label :card_quantity %>
         <%= form.text_field :card_quantity, placeholder: t("activerecord.attributes.card_bundle.card_quantity") %>
     </div>
 
     <div>
+        <%= form.label :current_assignee %>
         <%= form.collection_select :current_assignee_id, @agents, :id, :full_name_with_identifier,
-                                   { prompt: "[#{t("activerecord.attributes.card_bundle.current_assignee")}]" } %>
+                                   { include_blank: true  } %>
     </div>
 
     <div>
+        <%= form.label :parent_bundle %>
         <%= form.collection_select :parent_bundle_id, @available_parent_bundles, :id, :bundle_number,
-                                   { prompt: "[#{t("activerecord.attributes.card_bundle.parent_bundle")}]" }  %>
+                                   { include_blank: true }  %>
     </div>
 
     <div class="form-actions">

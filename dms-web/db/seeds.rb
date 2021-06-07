@@ -18,3 +18,8 @@ User.where(email: "sales_agent@company.com", mobile_number: "0820000002").
   first_or_create!(first_name: "Jimmy", surname: "SalesAgent",
                    password: "password", password_confirmation: "password",
                    user_role: :sales_agent)
+
+User.where(email: "sales_agent2@company.com", mobile_number: "0820000003").
+  first_or_create!(first_name: "Sally", surname: "SalesAgent",
+                   password: "password", password_confirmation: "password",
+                   user_role: :sales_agent)

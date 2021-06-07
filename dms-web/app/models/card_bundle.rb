@@ -1,16 +1,21 @@
 # frozen_string_literal: true
 
 class CardBundle < ApplicationRecord
+  include CurrentUser
+
   belongs_to :parent_bundle, class_name: "CardBundle", optional: true
   belongs_to :current_assignee, class_name: "User", optional: true
   belongs_to :loaded_by, class_name: "User", optional: true
   belongs_to :deleted_by, class_name: "User", optional: true
 
+  has_many :transactions, -> { order(created_at: :desc) }, class_name: "CardBundleTransaction"
+
   validates :bundle_number, uniqueness: { case_sensitive: false }, presence: true
 
   scope :active, -> () { (where(deleted_at: nil)) }
 
-  before_commit :mark_bundle_as_loaded
+  after_create :load_bundle
+  before_save :check_for_transfer
 
   enum status: {
     empty: 1,
@@ -20,13 +25,23 @@ class CardBundle < ApplicationRecord
 
   def handle_delete!
     self.deleted_at = Time.new
-    self.deleted_by = CurrentRequest.user
+    self.deleted_by = current_user
     save!
   end
 
   private
-    def mark_bundle_as_loaded
+    def load_bundle
       self.loaded_by = current_user
       self.prepared!
+      self.transactions.log_prepare!(user: current_user, card_quantity: self.card_quantity)
+    end
+
+    def check_for_transfer
+      if self.current_assignee_id_changed?
+        self.transactions.log_transfer!(user: current_user,
+                                        transferrer: User.find_by(id: self.current_assignee_id_was),
+                                        transferee: User.find_by(id: self.current_assignee_id),
+                                        card_quantity: self.card_quantity)
+      end
     end
 end

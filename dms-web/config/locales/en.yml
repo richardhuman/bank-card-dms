@@ -54,14 +54,24 @@ en:
   activerecord:
     models:
       card_bundle: Card bundle
+      card_bundle_transaction: Transactions
     attributes:
+      shared:
+        created_at: Created at
       card_bundle:
         bundle_number: Bundle number
         status: Status
         card_quantity: Quantity of cards
         current_assignee: Current agent
+        loaded_at: Loaded
         loaded_by: Loaded by
         parent_bundle: Parent bundle
+      card_bundle_transaction:
+        user: User
+        transferrer: Transferrer
+        transferee: Transferee
+        card_quantity: Quantity
+        transaction_type: Type
 
   forms:
     shared:
@@ -75,6 +85,11 @@ en:
         create: Add bundle
         update: Update bundle
         delete: Delete bundle
+
+
+#  current_bundle:
+#    transactions:
+#      title: Transactions
 
 
 #  helpers:

@@ -1,4 +1,5 @@
 export class Navbar {
+
   init() {
     document.querySelectorAll("a[data-popover]").forEach((popoverTrigger) => {
       popoverTrigger.addEventListener("click", (evt) => {

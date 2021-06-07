@@ -1,0 +1,31 @@
+<div class="content-section">
+    <h6 class="content-header"><%= t("activerecord.models.card_bundle_transaction") %></h6>
+
+    <table class="u-full-width">
+        <thead>
+        <tr>
+            <th><%= t("activerecord.attributes.shared.created_at") %></th>
+            <th><%= t("activerecord.attributes.card_bundle_transaction.user") %></th>
+            <th><%= t("activerecord.attributes.card_bundle_transaction.transaction_type") %></th>
+            <th><%= t("activerecord.attributes.card_bundle_transaction.card_quantity") %></th>
+            <th><%= t("activerecord.attributes.card_bundle_transaction.transferrer") %></th>
+            <th><%= t("activerecord.attributes.card_bundle_transaction.transferee") %></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @card_bundle.transactions.each do |txn| %>
+            <tr>
+                <td><%= txn.created_at.to_formatted_s(:timestamp) %></td>
+                <td><%= txn.user&.first_name %></td>
+                <td><%= txn.transaction_type.humanize %></td>
+                <td><%= txn.card_quantity %></td>
+                <td><%= txn.transferrer&.first_name %></td>
+                <td><%= txn.transferee&.first_name %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
+
