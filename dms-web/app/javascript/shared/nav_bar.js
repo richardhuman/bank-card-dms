@@ -18,10 +18,3 @@ export class Navbar {
     }
   }
 }
-
-//
-// function closePopover(e) {
-//   if ($(".popover.open").length > 0) {
-//     $(".popover").removeClass("open");
-//   }
-// }

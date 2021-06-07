@@ -1,0 +1,13 @@
+<%= form_with(model: user_session, local: true) do |form| %>
+
+    <%= render "/shared/form_errors", active_model_object:  user_session %>
+
+    <% #= form.label :username,  %>
+    <%= form.text_field :username, class: "u-full-width", placeholder: t("user_logins.form.username_placeholder") %>
+
+    <%= form.password_field :password, class: "u-full-width", placeholder: t("user_logins.form.password_placeholder") %>
+
+    <%= form.submit t("user_logins.form.submit"), { class: "button button-primary" } %>
+
+<% end %>
+

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class BackOffice::CardBundlesController < BackOffice::BaseController
-  before_action :set_card_bundle, only: [:show, :edit, :update, :destroy]
+  before_action :set_card_bundle, only: [:edit, :update, :destroy]
   before_action :load_supporting_models, except: [:index]
 
   def index
-    @card_bundles = CardBundle.all
+    @card_bundles = CardBundle.active
   end
 
   def show
@@ -30,15 +30,15 @@ class BackOffice::CardBundlesController < BackOffice::BaseController
 
   def update
     if @card_bundle.update(card_bundle_params)
-      redirect_to [:back_office, @card_bundle], notice: "card_bundle was successfully updated."
+      redirect_to action: :index, notice: "Card bundle was successfully updated."
     else
       render :edit
     end
   end
 
   def destroy
-    @card_bundle.destroy
-    redirect_to back_office_card_bundles_url, notice: "card_bundle was successfully destroyed."
+    @card_bundle.handle_delete!
+    redirect_to back_office_card_bundles_url, notice: "Card bundle was successfully destroyed."
   end
 
   private
@@ -54,6 +54,6 @@ class BackOffice::CardBundlesController < BackOffice::BaseController
 
     def load_supporting_models
       @available_parent_bundles = CardBundle.empty
-      @agents = User.active.sales_agent
+      @agents = User.active.role_sales_agent
     end
 end

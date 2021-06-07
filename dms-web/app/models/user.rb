@@ -14,7 +14,7 @@ class User < ApplicationRecord
     super_user: 1,
     back_office: 10,
     sales_agent: 20
-  }
+  }, _prefix: "role"
 
   def active?
     deleted_at.nil?

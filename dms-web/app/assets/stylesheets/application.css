@@ -14,5 +14,6 @@
  *= require skeleton-2.0.4/css/normalize
  *= require skeleton-2.0.4/css/skeleton
  *= require skeleton-2.0.4/css/extras
+ *= require components
  *= require forms
  */

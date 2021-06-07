@@ -2,15 +2,39 @@
 
     <%= render "/shared/form_errors", active_model_object: card_bundle %>
 
-    <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.card_bundle.bundle_number") %>
+    <div>
+        <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.card_bundle.bundle_number") %>
+    </div>
 
-    <%= form.text_field :card_quantity, placeholder: t("activerecord.attributes.card_bundle.card_quantity") %>
+    <div>
+        <%= form.text_field :card_quantity, placeholder: t("activerecord.attributes.card_bundle.card_quantity") %>
+    </div>
 
-    <%= form.collection_select :current_assignee_id, @agents, :id, :full_name_with_identifier, { prompt: "" },
-                               placeholder: t("activerecord.attributes.card_bundle.current_assignee") %>
+    <div>
+        <%= form.collection_select :current_assignee_id, @agents, :id, :full_name_with_identifier,
+                                   { prompt: "[#{t("activerecord.attributes.card_bundle.current_assignee")}]" } %>
+    </div>
 
-    <%= form.collection_select :parent_bundle_id, @available_parent_bundles, :id, :bundle_number, { prompt: "" } %>
+    <div>
+        <%= form.collection_select :parent_bundle_id, @available_parent_bundles, :id, :bundle_number,
+                                   { prompt: "[#{t("activerecord.attributes.card_bundle.parent_bundle")}]" }  %>
+    </div>
 
-    <%= form.submit t("forms.card_bundle.actions.create"), { class: "button-primary" } %>
-    <%= form.submit t("forms.shared.actions.cancel"), { class: "button" } %>
+    <div class="form-actions">
+        <%= link_to t("forms.shared.actions.cancel"), back_office_card_bundles_path,
+                    class: "button",
+                    data: { confirm: t("forms.shared.actions.confirm_cancel") }%>
+        <%= form.submit card_bundle.id ?
+                                t("forms.card_bundle.actions.update") :
+                                t("forms.card_bundle.actions.create"),
+                        { class: "button-primary" } %>
+    </div>
+
+    <% if card_bundle.id %>
+        <div class="form-actions danger">
+            <%= link_to t("forms.shared.actions.delete"), [:back_office, card_bundle], method: :delete,
+                        data: { confirm: t("forms.card_bundle.actions.delete")}, class: "button button-danger"  %>
+        </div>
+    <% end %>
+
 <% end %>

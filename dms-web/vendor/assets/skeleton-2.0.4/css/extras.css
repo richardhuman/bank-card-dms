@@ -1,3 +1,12 @@
+/*
+* Skeleton V2.0.4
+* Copyright 2014, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 12/29/2014
+*/
+
 .container {
     max-width: 800px; }
 .header {
@@ -8,13 +17,13 @@
 .value-props {
     margin-top: 4rem;
     margin-bottom: 4rem; }
-.docs-header {
+.content-header {
     text-transform: uppercase;
     font-size: 1.4rem;
     letter-spacing: .2rem;
     font-weight: 600; }
-.docs-section {
-    border-top: 1px solid #eee;
+.content-section {
+    /*border-top: 1px solid #eee;*/
     padding: 4rem 0;
     margin-bottom: 0;}
 .value-img {
@@ -33,16 +42,16 @@
     margin-bottom: .75rem;
     font-weight: 600;
     letter-spacing: .1rem; }
-.docs-example .row,
-.docs-example.row,
-.docs-example form {
+.content-example .row,
+.content-example.row,
+.content-example form {
     margin-bottom: 0; }
-.docs-example h1,
-.docs-example h2,
-.docs-example h3,
-.docs-example h4,
-.docs-example h5,
-.docs-example h6 {
+.content-example h1,
+.content-example h2,
+.content-example h3,
+.content-example h4,
+.content-example h5,
+.content-example h6 {
     margin-bottom: 1rem; }
 .heading-font-size {
     font-size: 1.2rem;
@@ -96,7 +105,7 @@
     .example-grid .column,
     .example-grid .columns {
         margin-bottom: 1.5rem; }
-    .docs-section {
+    .content-section {
         padding: 6rem 0; }
     .example-send-yourself-copy {
         float: right;
@@ -112,7 +121,7 @@
 /* Larger than tablet */
 @media (min-width: 750px) {
     /* Navbar */
-    .navbar + .docs-section {
+    .navbar + .content-section {
         border-top-width: 0; }
     .navbar,
     .navbar-spacer {

@@ -26,8 +26,8 @@
                     <li class="navbar-item"><%= link_to t("main_menu.campaigns"), "/", class: "navbar-link" %></li>
                     <li class="navbar-item"><%= link_to t("main_menu.bundles"), back_office_card_bundles_path, class: "navbar-link" %></li>
                     <li class="navbar-item"><%= link_to t("main_menu.agents"), "/", class: "navbar-link" %></li>
-                    <li class="navbar-item">
-                        <%= link_to t("main_menu.account"), "#", class: "navbar-link popover-trigger", data: { popover: "navbar-account-popover" } %>
+                    <li class="navbar-item" style="float: right;">
+                        <%= link_to current_user.first_name , "#", class: "navbar-link ", style: "margin-right: 0;", data: { popover: "navbar-account-popover" } %>
                         <div id="navbar-account-popover" class="popover">
                             <ul class="popover-list">
                                 <li class="popover-item"><%= link_to t("main_menu.account_settings"), "#", class: "popover-link" %></li>
@@ -39,11 +39,11 @@
             </ul>
         </div>
     </nav>
+
     <% if notice %>
-        <div class="row">
-            <p id="notice"><%= notice %></p>
-        </div>
+        <p id="notice" class="notice">This is a notice <%= notice %></p>
     <% end %>
+
     <div class="row">
         <%= yield %>
     </div>

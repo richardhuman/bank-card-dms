@@ -1,5 +1,5 @@
-<div class="docs-section">
-    <h6 class="docs-header"><%= t("main_menu.bundles") %></h6>
+<div class="content-section">
+    <h6 class="content-header"><%= t("main_menu.bundles") %></h6>
 
     <table class="u-full-width">
         <thead>
@@ -9,7 +9,7 @@
             <th>Quantity</th>
             <th>Loaded by</th>
             <th>Current assignee</th>
-            <th colspan="3"></th>
+            <th></th>
         </tr>
         </thead>
 
@@ -19,17 +19,14 @@
                 <td><%= card_bundle.bundle_number %></td>
                 <td><%= card_bundle.status.humanize %></td>
                 <td><%= card_bundle.card_quantity %></td>
-                <td><%= card_bundle.loaded_by&.full_name %></td>
-                <td><%= card_bundle.current_assignee&.full_name %></td>
-                <td><%= link_to 'Show', [:back_office, card_bundle] %></td>
+                <td><%= card_bundle.loaded_by&.first_name %></td>
+                <td><%= card_bundle.current_assignee&.first_name %></td>
                 <td><%= link_to 'Edit', edit_back_office_card_bundle_path(card_bundle) %></td>
-                <td><%= link_to 'Destroy', [:back_office, card_bundle], method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
         <% end %>
         </tbody>
     </table>
 </div>
 
-<br>
 
 <%= link_to 'New Card bundle', new_back_office_card_bundle_path, class: "button button-primary" %>

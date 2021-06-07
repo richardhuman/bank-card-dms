@@ -67,10 +67,15 @@ en:
     shared:
       actions:
         cancel: Cancel
+        delete: Delete
+        confirm_cancel: Are you sure you wish to cancel editing and revert all changes?
+        confirm_delete: Are you sure you wish to delete this item? This cannot be undone.
     card_bundle:
       actions:
         create: Add bundle
-        edit: Add bundle
+        update: Update bundle
+        delete: Delete bundle
+
 
 #  helpers:
 #    label:

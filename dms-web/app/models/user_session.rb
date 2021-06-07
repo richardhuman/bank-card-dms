@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserLogin
+class UserSession
   include ActiveModel::Model
   attr_accessor :username, :password
 
@@ -23,7 +23,7 @@ class UserLogin
       return nil
     end
 
-    unless  login.authenticate(self.password)
+    unless login.authenticate(self.password)
       errors.add(:base, I18n.t("errors.login.failed"))
       return nil
     end
