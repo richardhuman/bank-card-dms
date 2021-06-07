@@ -23,7 +23,7 @@
             <ul class="navbar-list">
                 <li class="navbar-item"><%= link_to t("main_menu.home"), "/", { class: "navbar-link" } %></li>
                 <% if current_user %>
-                    <li class="navbar-item"><%= link_to t("main_menu.campaigns"), "/", class: "navbar-link" %></li>
+                    <li class="navbar-item"><%= link_to t("main_menu.campaigns"), back_office_campaigns_path, class: "navbar-link" %></li>
                     <li class="navbar-item"><%= link_to t("main_menu.bundles"), back_office_card_bundles_path, class: "navbar-link" %></li>
                     <li class="navbar-item"><%= link_to t("main_menu.agents"), "/", class: "navbar-link" %></li>
                     <li class="navbar-item" style="float: right;">

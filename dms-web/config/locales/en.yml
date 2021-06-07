@@ -58,6 +58,10 @@ en:
     attributes:
       shared:
         created_at: Created at
+      campaign:
+        title: Title
+        description: Description
+        created_by: Created by
       card_bundle:
         bundle_number: Bundle number
         status: Status
@@ -85,6 +89,11 @@ en:
         create: Add bundle
         update: Update bundle
         delete: Delete bundle
+    campaign:
+      actions:
+        create: Add campaign
+        update: Update campaign
+        delete: Delete campaign
 
 
 #  current_bundle:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_07_075013) do
+ActiveRecord::Schema.define(version: 2021_06_07_120758) do
 
   create_table "barcode_symbologies", charset: "utf8", force: :cascade do |t|
     t.string "code", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2021_06_07_075013) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_barcode_symbologies_on_code", unique: true
     t.index ["name"], name: "index_barcode_symbologies_on_name", unique: true
+  end
+
+  create_table "campaigns", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description", limit: 2000
+    t.bigint "created_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_campaigns_on_created_by_id"
   end
 
   create_table "card_bundle_transactions", charset: "utf8", force: :cascade do |t|
@@ -83,6 +92,7 @@ ActiveRecord::Schema.define(version: 2021_06_07_075013) do
     t.index ["owner_id"], name: "index_users_on_owner_id"
   end
 
+  add_foreign_key "campaigns", "users", column: "created_by_id"
   add_foreign_key "card_bundle_transactions", "card_bundles"
   add_foreign_key "card_bundle_transactions", "users"
   add_foreign_key "card_bundle_transactions", "users", column: "transferee_id"

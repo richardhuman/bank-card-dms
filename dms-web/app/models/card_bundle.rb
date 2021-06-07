@@ -5,7 +5,7 @@ class CardBundle < ApplicationRecord
 
   belongs_to :parent_bundle, class_name: "CardBundle", optional: true
   belongs_to :current_assignee, class_name: "User", optional: true
-  belongs_to :loaded_by, class_name: "User", optional: true
+  belongs_to :loaded_by, class_name: "User"
   belongs_to :deleted_by, class_name: "User", optional: true
 
   has_many :transactions, -> { order(created_at: :desc) }, class_name: "CardBundleTransaction"
@@ -14,6 +14,7 @@ class CardBundle < ApplicationRecord
 
   scope :active, -> () { (where(deleted_at: nil)) }
 
+  after_initialize :track_create_user
   after_create :load_bundle
   before_save :check_for_transfer
 
@@ -30,8 +31,11 @@ class CardBundle < ApplicationRecord
   end
 
   private
-    def load_bundle
+    def track_create_user
       self.loaded_by = current_user
+    end
+
+    def load_bundle
       self.prepared!
       self.transactions.log_prepare!(user: current_user, card_quantity: self.card_quantity)
     end

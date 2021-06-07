@@ -1,0 +1,33 @@
+<%= form_with(model: [:back_office, campaign]) do |form| %>
+
+    <%= render "/shared/form_errors", active_model_object: campaign %>
+
+    <div>
+        <%= form.label :title %>
+        <%= form.text_field :title, class: "u-full-width", placeholder: t("activerecord.attributes.campaign.title") %>
+    </div>
+
+    <div>
+        <%= form.label :description %>
+        <%= form.text_area :description, rows: 5, class: "u-full-width", placeholder: t("activerecord.attributes.campaign.description") %>
+    </div>
+
+    <div class="form-actions">
+        <%= link_to t("forms.shared.actions.cancel"), back_office_campaigns_path,
+                    class: "button",
+                    data: { confirm: t("forms.shared.actions.confirm_cancel") }%>
+        <%= form.submit campaign.id ?
+                                t("forms.campaign.actions.update") :
+                                t("forms.campaign.actions.create"),
+                        { class: "button-primary" } %>
+    </div>
+
+    <% if campaign.id %>
+        <div class="form-actions danger">
+            <%= link_to t("forms.shared.actions.delete"), [:back_office, campaign], method: :delete,
+                        data: { confirm: t("forms.campaign.actions.delete")}, class: "button button-danger"  %>
+        </div>
+    <% end %>
+
+
+<% end %>
