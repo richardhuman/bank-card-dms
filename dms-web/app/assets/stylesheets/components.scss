@@ -1,8 +1,23 @@
 @import "vars";
+.notice-container {
+    position: relative;
+}
+
 .notice {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 40%;
     background-color: $colour_success;
     color: white;
-    padding: 1rem;
+    padding: 2rem;
     margin-top: 1rem;
     border-radius: 4px;
+    opacity: 0.95;
+}
+
+.turbo-progress-bar {
+    height: 5px;
+    background-color: $blue;
 }

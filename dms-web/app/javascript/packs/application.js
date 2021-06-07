@@ -4,17 +4,16 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs";
-// import "@hotwired/turbo-rails";
+import { Turbo, cable } from "@hotwired/turbo-rails";
+
+// eslint-disable-next-line import/no-unresolved
+import "controllers"; // Stimulus
+
+Turbo.setProgressBarDelay(100);
+Rails.start();
+
+// TODO: Unused for now
 // import * as ActiveStorage from "@rails/activestorage";
 // import "channels";
-
-Rails.start();
 // ActiveStorage.start();
 
-// import "controllers";
-
-import { Navbar } from "../shared/nav_bar";
-
-document.addEventListener("DOMContentLoaded", () => {
-  new Navbar().init();
-});

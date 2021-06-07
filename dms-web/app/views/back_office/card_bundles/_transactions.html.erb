@@ -15,8 +15,8 @@
         </thead>
 
         <tbody>
-        <% @card_bundle.transactions.each do |txn| %>
-            <tr>
+        <% card_bundle.transactions.chronologically.each do |txn| %>
+            <tr id="<%= dom_id(txn) %>">
                 <td><%= txn.created_at.to_formatted_s(:timestamp) %></td>
                 <td><%= txn.user&.first_name %></td>
                 <td><%= txn.transaction_type.humanize %></td>

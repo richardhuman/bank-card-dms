@@ -1,32 +1,34 @@
+<%= render layout: "back_office/shared/turbo_sub_layout" do %>
 
-<div class="content-section">
-    <h6 class="content-header"><%= t("main_menu.campaigns") %></h6>
+    <div class="content-section">
+        <h6 class="content-header"><%= t("main_menu.campaigns") %></h6>
 
-    <table class="u-full-width">
-        <thead>
-        <tr>
-            <th><%= t("activerecord.attributes.campaign.title") %></th>
-            <th><%= t("activerecord.attributes.campaign.description") %></th>
-            <th><%= t("activerecord.attributes.campaign.created_by") %></th>
-            <th><%= t("activerecord.attributes.shared.created_at") %></th>
-            <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <% @campaigns.each do |campaign| %>
+        <table class="u-full-width">
+            <thead>
             <tr>
-                <td><%= campaign.title %></td>
-                <td><%= campaign.description %></td>
-                <td><%= campaign.created_by.first_name %></td>
-                <td><%= campaign.created_at.to_formatted_s(:timestamp) %></td>
-                <td><%= link_to 'Edit', edit_back_office_campaign_path(campaign) %></td>
+                <th><%= t("activerecord.attributes.campaign.title") %></th>
+                <th><%= t("activerecord.attributes.campaign.description") %></th>
+                <th><%= t("activerecord.attributes.campaign.created_by") %></th>
+                <th><%= t("activerecord.attributes.shared.created_at") %></th>
+                <th></th>
             </tr>
-        <% end %>
-        </tbody>
-    </table>
-</div>
+            </thead>
+
+            <tbody>
+            <% @campaigns.each do |campaign| %>
+                <tr>
+                    <td><%= campaign.title %></td>
+                    <td><%= campaign.description %></td>
+                    <td><%= campaign.created_by.first_name %></td>
+                    <td><%= campaign.created_at.to_formatted_s(:timestamp) %></td>
+                    <td><%= link_to 'Edit', edit_back_office_campaign_path(campaign), data: { turbo_frame: "_top" }  %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
 
 
-<%= link_to t("forms.campaign.actions.create"), new_back_office_campaign_path, class: "button button-primary" %>
+    <%= link_to t("forms.campaign.actions.create"), new_back_office_campaign_path, class: "button button-primary", data: { turbo_frame: "_top" }  %>
 
+<% end %>

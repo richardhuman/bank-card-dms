@@ -6,6 +6,9 @@ class CardBundleTransaction < ApplicationRecord
   belongs_to :transferrer, class_name: "User", optional: true
   belongs_to :transferee, class_name: "User", optional: true
 
+  scope :chronologically, ->() { order(created_at: :asc) }
+  scope :reverse_chronologically, ->() { order(created_at: :desc) }
+
   enum transaction_type: {
     prepared: 1,
     transfer: 2,

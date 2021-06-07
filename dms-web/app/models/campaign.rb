@@ -9,6 +9,8 @@ class Campaign < ApplicationRecord
 
   after_initialize :track_create_user
 
+  scope :chronologically, -> () { order(created_at: :asc) }
+
   private
     def track_create_user
       self.created_by = current_user

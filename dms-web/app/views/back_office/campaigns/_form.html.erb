@@ -24,7 +24,7 @@
 
     <% if campaign.id %>
         <div class="form-actions danger">
-            <%= link_to t("forms.shared.actions.delete"), [:back_office, campaign], method: :delete,
+            <%= link_to t("forms.campaign.actions.delete"), [:back_office, campaign], method: :delete,
                         data: { confirm: t("forms.campaign.actions.delete")}, class: "button button-danger"  %>
         </div>
     <% end %>

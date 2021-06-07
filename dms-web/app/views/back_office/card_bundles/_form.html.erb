@@ -1,5 +1,5 @@
 <%= form_with(model: [:back_office, card_bundle]) do |form| %>
-
+<!--    data: { controller: "flash-notice", action: "turbo:submit-end->flash-notice#startClose" }-->
     <%= render "/shared/form_errors", active_model_object: card_bundle %>
 
     <div>
@@ -36,8 +36,8 @@
 
     <% if card_bundle.id %>
         <div class="form-actions danger">
-            <%= link_to t("forms.shared.actions.delete"), [:back_office, card_bundle], method: :delete,
-                        data: { confirm: t("forms.card_bundle.actions.delete")}, class: "button button-danger"  %>
+            <%= link_to t("forms.card_bundle.actions.delete"), [:back_office, card_bundle], method: :delete,
+                        data: { confirm: t("forms.shared.actions.confirm_delete")}, class: "button button-danger"  %>
         </div>
     <% end %>
 

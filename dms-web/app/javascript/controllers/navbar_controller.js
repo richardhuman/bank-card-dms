@@ -1,6 +1,8 @@
-export class Navbar {
+/* eslint-disable no-undef */
+import { Controller } from "stimulus";
 
-  init() {
+export default class Navbar extends Controller {
+  connect() {
     document.querySelectorAll("a[data-popover]").forEach((popoverTrigger) => {
       popoverTrigger.addEventListener("click", (evt) => {
         evt.stopImmediatePropagation();
@@ -9,6 +11,7 @@ export class Navbar {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   togglePopover(popoverElement) {
     const popoverId = popoverElement.dataset.popover;
     const popover = document.querySelector(`#${popoverId}`);

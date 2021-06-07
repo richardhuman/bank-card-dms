@@ -1,24 +1,23 @@
 # frozen_string_literal: true
 
 class BackOffice::CampaignsController < ApplicationController
-  before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :set_campaign, only: [:edit, :update, :destroy]
 
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.chronologically
   end
 
   def new
     @campaign = Campaign.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @campaign = Campaign.new(campaign_params)
 
     if @campaign.save
-      redirect_to url_for(action: :edit, id: @campaign), notice: "Campaign was successfully created."
+      redirect_to url_for(action: :edit, id: @campaign), notice: I18n.t("forms.campaign.notices.create")
     else
       render :new
     end
@@ -26,7 +25,7 @@ class BackOffice::CampaignsController < ApplicationController
 
   def update
     if @campaign.update(campaign_params)
-      redirect_to url_for(action: :edit, id: @campaign), notice: "Campaign was successfully updated."
+      redirect_to url_for(action: :edit, id: @campaign), notice: I18n.t("forms.campaign.notices.update")
     else
       render :edit
     end
@@ -34,7 +33,7 @@ class BackOffice::CampaignsController < ApplicationController
 
   def destroy
     @campaign.destroy
-    redirect_to campaigns_url, notice: "Campaign was successfully destroyed."
+    redirect_to campaigns_url, notice: I18n.t("forms.campaign.notices.delete")
   end
 
   private

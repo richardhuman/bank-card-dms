@@ -81,7 +81,6 @@ en:
     shared:
       actions:
         cancel: Cancel
-        delete: Delete
         confirm_cancel: Are you sure you wish to cancel editing and revert all changes?
         confirm_delete: Are you sure you wish to delete this item? This cannot be undone.
     card_bundle:
@@ -89,11 +88,19 @@ en:
         create: Add bundle
         update: Update bundle
         delete: Delete bundle
+      notices:
+        create: The bundle was succesfully created.
+        update: The bundle was succesfully updated.
+        delete: The bundle was succesfully deleted.
     campaign:
       actions:
         create: Add campaign
         update: Update campaign
         delete: Delete campaign
+      notices:
+        create: The campaign was succesfully created.
+        update: The campaign was succesfully updated.
+        delete: The campaign was succesfully deleted.
 
 
 #  current_bundle:

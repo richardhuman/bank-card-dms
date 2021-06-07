@@ -12,7 +12,8 @@ class CardBundle < ApplicationRecord
 
   validates :bundle_number, uniqueness: { case_sensitive: false }, presence: true
 
-  scope :active, -> () { (where(deleted_at: nil)) }
+  scope :active, -> () { where(deleted_at: nil) }
+  scope :chronologically, -> () { order(created_at: :asc) }
 
   after_initialize :track_create_user
   after_create :load_bundle

@@ -1,5 +1,9 @@
-<div class="content-section">
-    <h6 class="content-header"><%= t("forms.campaign.actions.update") %></h6>
-    <%= render "form", campaign: @campaign %>
-</div>
+<%= render layout: "back_office/shared/turbo_sub_layout" do %>
+
+    <div class="content-section">
+        <h6 class="content-header"><%= t("forms.campaign.actions.update") %></h6>
+        <%= render "form", campaign: @campaign %>
+    </div>
+
+<% end %>
 
