@@ -22,7 +22,7 @@ class BackOffice::CardBundlesController < BackOffice::BaseController
     @card_bundle = CardBundle.new(card_bundle_params)
 
     if @card_bundle.save
-      redirect_to action: :index, notice: "Card bundle was successfully created."
+      redirect_to url_for(action: :edit, id: @card_bundle), notice: "Card bundle was successfully created."
     else
       render :new
     end
@@ -30,7 +30,7 @@ class BackOffice::CardBundlesController < BackOffice::BaseController
 
   def update
     if @card_bundle.update(card_bundle_params)
-      redirect_to action: :index, notice: "Card bundle was successfully updated."
+      redirect_to url_for(action: :edit, id: @card_bundle), notice: "Card bundle was successfully updated."
     else
       render :edit
     end
