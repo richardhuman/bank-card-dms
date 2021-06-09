@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { Controller } from "stimulus";
 
-export default class Navbar extends Controller {
+export default class extends Controller {
   connect() {
     document.querySelectorAll("a[data-popover]").forEach((popoverTrigger) => {
       popoverTrigger.addEventListener("click", (evt) => {
