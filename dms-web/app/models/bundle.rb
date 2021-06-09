@@ -13,6 +13,7 @@ class Bundle < ApplicationRecord
   validates :bundle_number, uniqueness: { case_sensitive: false }, presence: true
 
   scope :active, -> () { where(deleted_at: nil) }
+  scope :assigned_to, -> (user) { where(current_assignee: user) }
   scope :chronologically, -> () { order(created_at: :asc) }
 
   after_initialize :track_create_user

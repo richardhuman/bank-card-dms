@@ -85,11 +85,11 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
     t.timestamp "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "owner_id"
+    t.bigint "manager_id"
     t.integer "user_role", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["manager_id"], name: "index_users_on_manager_id"
     t.index ["mobile_number"], name: "index_users_on_mobile_number", unique: true
-    t.index ["owner_id"], name: "index_users_on_owner_id"
   end
 
   add_foreign_key "bundle_transactions", "bundles"
@@ -102,5 +102,5 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
   add_foreign_key "bundles", "users", column: "parent_bundle_id"
   add_foreign_key "campaigns", "users", column: "created_by_id"
   add_foreign_key "cards", "bundles"
-  add_foreign_key "users", "users", column: "owner_id"
+  add_foreign_key "users", "users", column: "manager_id"
 end

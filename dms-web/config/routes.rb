@@ -2,8 +2,14 @@
 
 Rails.application.routes.draw do
   resources :user_sessions, only: [:new, :create, :delete]
+
   namespace :back_office do
     resources :campaigns, except: [:show]
+    resources :bundles, except: [:show]
+    resources :users, except: [:show]
+  end
+
+  namespace :agents do
     resources :bundles, except: [:show]
   end
 

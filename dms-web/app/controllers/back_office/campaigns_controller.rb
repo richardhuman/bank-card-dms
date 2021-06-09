@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BackOffice::CampaignsController < ApplicationController
+class BackOffice::CampaignsController < BackOffice::BaseController
   before_action :set_campaign, only: [:edit, :update, :destroy]
 
   def index

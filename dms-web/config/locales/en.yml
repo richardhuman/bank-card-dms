@@ -35,6 +35,7 @@ en:
     campaigns: Campaigns
     bundles: Bundles
     agents: Agents
+    users: Users
     account: Account
     account_settings: Settings
     account_logout: Logout
@@ -76,6 +77,15 @@ en:
         transferee: Transferee
         card_quantity: Quantity
         transaction_type: Type
+      user:
+        email: Email
+        contact: Contact
+        mobile_number: Mobile number
+        name: Name
+        first_name: First name
+        surname: Surname
+        manager: Manager
+        user_role: Role
 
   forms:
     shared:
@@ -101,6 +111,15 @@ en:
         create: The campaign was succesfully created.
         update: The campaign was succesfully updated.
         delete: The campaign was succesfully deleted.
+    user:
+      actions:
+        create: Add user
+        update: Update user
+        delete: Delete user
+      notices:
+        create: The user was succesfully created.
+        update: The user was succesfully updated.
+        delete: The user was succesfully deleted.
 
 
 #  current_bundle:

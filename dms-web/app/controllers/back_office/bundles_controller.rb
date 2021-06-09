@@ -2,7 +2,7 @@
 
 class BackOffice::BundlesController < BackOffice::BaseController
   before_action :set_bundle, only: [:edit, :update, :destroy, :transactions]
-  before_action :load_supporting_models, except: [:index]
+  before_action :set_lookups, except: [:index]
 
   def index
     @bundles = Bundle.active.chronologically
@@ -47,8 +47,8 @@ class BackOffice::BundlesController < BackOffice::BaseController
       params.require(:bundle).permit(:bundle_number, :card_quantity, :current_assignee_id, :parent_bundle_id)
     end
 
-    def load_supporting_models
+    def set_lookups
       @available_parent_bundles = Bundle.empty.chronologically
-      @agents = User.active.role_sales_agent
+      @agents = User.active.sales_agent_role.order_name
     end
 end

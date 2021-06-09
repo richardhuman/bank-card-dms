@@ -50,8 +50,7 @@ class UserSessionsController < ApplicationController
     end
 
     def get_home_path_for_user(user)
-      if user.role_back_office? || user.role_super_user?
-        puts "redirect #{back_office_bundles_path}"
+      if user.back_office_role? || user.super_user_role?
         back_office_bundles_path
       else
         raise "Not supported yet"

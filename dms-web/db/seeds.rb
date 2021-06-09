@@ -7,19 +7,19 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-BarcodeSymbology.where(code: BarcodeSymbology::EAN_13).first_or_create!(name: "EAN 13")
+# BarcodeSymbology.where(code: BarcodeSymbology::EAN_13).first_or_create!(name: "EAN 13")
 
-User.where(email: "backoffice@company.com", mobile_number: "0820000001").
+back_office = User.where(email: "backoffice@company.com", mobile_number: "0820000001").
   first_or_create!(first_name: "Richard", surname: "BackOffice",
                    password: "password", password_confirmation: "password",
                    user_role: :back_office)
 
-User.where(email: "sales_agent@company.com", mobile_number: "0820000002").
+jimmy = User.where(email: "sales_agent@company.com", mobile_number: "0820000002").
   first_or_create!(first_name: "Jimmy", surname: "SalesAgent",
                    password: "password", password_confirmation: "password",
-                   user_role: :sales_agent)
+                   user_role: :sales_agent, manager: back_office)
 
 User.where(email: "sales_agent2@company.com", mobile_number: "0820000003").
   first_or_create!(first_name: "Sally", surname: "SalesAgent",
                    password: "password", password_confirmation: "password",
-                   user_role: :sales_agent)
+                   user_role: :sales_agent, manager: jimmy)
