@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
     t.bigint "user_id", null: false
     t.bigint "transferrer_id"
     t.bigint "transferee_id"
-    t.integer "card_quantity"
+    t.integer "quantity", null: false
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -40,7 +40,8 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
   create_table "bundles", charset: "utf8", force: :cascade do |t|
     t.string "bundle_number", null: false
     t.integer "status", default: 1, null: false
-    t.integer "card_quantity", null: false
+    t.integer "current_quantity", default: 0, null: false
+    t.integer "initial_quantity", default: 0, null: false
     t.bigint "current_assignee_id"
     t.bigint "loaded_by_id"
     t.timestamp "loaded_at"

@@ -1,4 +1,4 @@
-<%= render layout: "back_office/shared/turbo_sub_layout" do %>
+<%= render layout: "shared/turbo_sub_layout" do %>
 
     <div class="content-section">
         <h6 class="content-header"><%= t("main_menu.bundles") %></h6>
@@ -8,7 +8,7 @@
             <tr>
                 <th><%= t("activerecord.attributes.bundle.bundle_number") %></th>
                 <th><%= t("activerecord.attributes.bundle.status") %></th>
-                <th><%= t("activerecord.attributes.bundle.card_quantity") %></th>
+                <th><%= t("activerecord.attributes.bundle.current_quantity") %></th>
                 <th><%= t("activerecord.attributes.bundle.loaded_at") %></th>
                 <th><%= t("activerecord.attributes.bundle.loaded_by") %></th>
                 <th><%= t("activerecord.attributes.bundle.current_assignee") %></th>
@@ -21,7 +21,7 @@
                 <tr>
                     <td><%= bundle.bundle_number %></td>
                     <td><%= bundle.status.humanize %></td>
-                    <td><%= bundle.card_quantity %></td>
+                    <td><%= bundle.current_quantity %></td>
                     <td><%= bundle.created_at.to_formatted_s(:timestamp) %></td>
                     <td><%= bundle.loaded_by&.first_name %></td>
                     <td><%= bundle.current_assignee&.first_name %></td>

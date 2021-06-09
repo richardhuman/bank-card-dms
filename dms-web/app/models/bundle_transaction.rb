@@ -16,13 +16,13 @@ class BundleTransaction < ApplicationRecord
     return: 4
   }
 
-  def self.log_prepare!(user:, card_quantity:, description: nil)
-    create!(user: user, transaction_type: :prepared, card_quantity: card_quantity, description: description)
+  def self.log_loaded!(user:, quantity:, description: nil)
+    create!(user: user, transaction_type: :prepared, quantity: quantity, description: description)
   end
 
-  def self.log_transfer!(user:, transferrer:, transferee:, card_quantity:, description: nil)
+  def self.log_transfer!(user:, transferrer:, transferee:, current_quantity:, description: nil)
     create!(user: user, transaction_type: :transfer,
             transferrer: transferrer, transferee: transferee,
-            card_quantity: card_quantity, description: description)
+            current_quantity: current_quantity, description: description)
   end
 end

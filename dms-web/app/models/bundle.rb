@@ -17,14 +17,15 @@ class Bundle < ApplicationRecord
   scope :chronologically, -> () { order(created_at: :asc) }
 
   after_initialize :track_create_user
-  after_create :load_bundle
-  before_save :check_for_transfer
+  before_create :load_bundle
+  after_create :track_prepare_txn
+  # before_save :check_for_transfer
 
   enum status: {
     empty: 1,
-    prepared: 5,
+    loaded: 5,
     assigned: 10
-  }
+  }, _suffix: "status"
 
   def handle_delete!
     self.deleted_at = Time.new
@@ -38,16 +39,20 @@ class Bundle < ApplicationRecord
     end
 
     def load_bundle
-      self.prepared!
-      self.transactions.log_prepare!(user: current_user, card_quantity: self.card_quantity)
+      self.status = :loaded
+      self.initial_quantity = current_quantity
     end
 
-    def check_for_transfer
-      if self.current_assignee_id_changed?
-        self.transactions.log_transfer!(user: current_user,
-                                        transferrer: User.find_by(id: self.current_assignee_id_was),
-                                        transferee: User.find_by(id: self.current_assignee_id),
-                                        card_quantity: self.card_quantity)
-      end
+    def track_prepare_txn
+      self.transactions.log_loaded!(user: current_user, quantity: self.current_quantity)
     end
+
+  # def check_for_transfer
+  #   if self.current_assignee_id_changed?
+  #     self.transactions.log_transfer!(user: current_user,
+  #                                     transferrer: User.find_by(id: self.current_assignee_id_was),
+  #                                     transferee: User.find_by(id: self.current_assignee_id),
+  #                                     current_quantity: self.current_quantity)
+  #   end
+  # end
 end

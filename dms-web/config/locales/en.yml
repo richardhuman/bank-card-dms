@@ -66,7 +66,7 @@ en:
       bundle:
         bundle_number: Bundle number
         status: Status
-        card_quantity: Quantity of cards
+        current_quantity: Current quantity
         current_assignee: Current agent
         loaded_at: Loaded
         loaded_by: Loaded by
@@ -75,7 +75,7 @@ en:
         user: User
         transferrer: Transferrer
         transferee: Transferee
-        card_quantity: Quantity
+        quantity: Quantity
         transaction_type: Type
       user:
         email: Email
@@ -120,6 +120,14 @@ en:
         create: The user was succesfully created.
         update: The user was succesfully updated.
         delete: The user was succesfully deleted.
+
+  agent_bundles:
+    my_bundle:
+      header: My bundles
+    team_bundles:
+      header: My team's bundles
+
+
 
 
 #  current_bundle:

@@ -8,7 +8,7 @@ class CreateBundleTransactions < ActiveRecord::Migration[6.1]
       t.references :user, null: false, foreign_key: { to_table: :users }
       t.references :transferrer, null: true, foreign_key:  { to_table: :users }
       t.references :transferee, null: true, foreign_key:  { to_table: :users }
-      t.integer :card_quantity
+      t.integer :quantity, null: false
       t.string :description
 
       t.timestamps
