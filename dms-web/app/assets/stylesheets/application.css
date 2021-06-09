@@ -13,7 +13,7 @@
  *= require_self
  *= require skeleton-2.0.4/css/normalize
  *= require skeleton-2.0.4/css/skeleton
- *= require skeleton-2.0.4/css/extras
+ *= require layout
  *= require skeleton_overrides
  *= require components
  *= require forms
