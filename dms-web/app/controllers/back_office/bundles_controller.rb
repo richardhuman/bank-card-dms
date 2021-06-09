@@ -44,7 +44,7 @@ class BackOffice::BundlesController < BackOffice::BaseController
     end
 
     def bundle_params
-      params.require(:bundle).permit(:bundle_number, :current_quantity, :current_assignee_id, :parent_bundle_id)
+      params.require(:bundle).permit(:bundle_number, :current_quantity, :current_assignee_id, :parent_bundle_id, :released)
     end
 
     def set_lookups

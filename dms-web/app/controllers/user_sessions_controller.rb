@@ -53,7 +53,7 @@ class UserSessionsController < ApplicationController
       if user.back_office_role? || user.super_user_role?
         back_office_bundles_path
       else
-        raise "Not supported yet"
+        agents_bundle_path
       end
     end
 end

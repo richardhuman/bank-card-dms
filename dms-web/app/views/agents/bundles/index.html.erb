@@ -1,0 +1,31 @@
+<%= render layout: "shared/turbo_sub_layout" do %>
+
+    <div class="content-section">
+        <h6 class="content-header"><%= t("agent_bundles.my_bundle.header") %></h6>
+
+        <table class="u-full-width">
+            <thead>
+            <tr>
+                <th><%= t("activerecord.attributes.bundle.bundle_number") %></th>
+                <th><%= t("activerecord.attributes.bundle.current_assignee") %></th>
+                <th><%= t("activerecord.attributes.bundle.current_quantity") %></th>
+                <th><%= t("activerecord.attributes.shared.created_at") %></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @my_bundles.each do |bundle| %>
+                <tr>
+                    <td><%= bundle.bundle_number %></td>
+                    <td><%= bundle.current_assignee&.first_name %></td>
+                    <td><%= bundle.current_quantity %></td>
+                    <td><%= bundle.created_at.to_formatted_s(:timestamp) %></td>
+                    <td><%= link_to 'Edit', edit_agents_bundle_path(bundle), data: { turbo_frame: "_top" }  %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+
+<% end %>

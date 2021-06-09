@@ -1,10 +1,10 @@
 <%= form_with(model: [:back_office, bundle]) do |form| %>
-<!--    data: { controller: "flash-notice", action: "turbo:submit-end->flash-notice#startClose" }-->
+
     <%= render "/shared/form_errors", active_model_object: bundle %>
 
     <div>
         <%= form.label :bundle_number %>
-        <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.bundle.bundle_number") %>
+        <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.bundle.bundle_number") %> &nbsp; <%= bundle.status.humanize unless bundle.id.nil? %>
     </div>
 
     <div>
@@ -22,6 +22,11 @@
         <%= form.label :parent_bundle %>
         <%= form.collection_select :parent_bundle_id, @available_parent_bundles, :id, :bundle_number,
                                    { include_blank: true }  %>
+    </div>
+
+    <div>
+        <%= form.label :released %>
+        <%= form.check_box :released %>
     </div>
 
     <div class="form-actions">

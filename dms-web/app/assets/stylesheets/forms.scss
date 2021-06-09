@@ -20,7 +20,7 @@ form {
         padding: 2px;
         display: inline;
 
-        input {
+        input, select {
             border-color: $colour_error
         }
     }

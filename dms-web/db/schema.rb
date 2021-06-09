@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_07_120758) do
+ActiveRecord::Schema.define(version: 2021_06_09_204609) do
 
   create_table "barcode_symbologies", charset: "utf8", force: :cascade do |t|
     t.string "code", null: false
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
     t.bigint "parent_bundle_id"
     t.timestamp "deleted_at"
     t.bigint "deleted_by_id"
+    t.timestamp "released_at"
+    t.boolean "released", default: false, null: false
     t.index ["bundle_number"], name: "index_bundles_on_bundle_number", unique: true
     t.index ["current_assignee_id"], name: "index_bundles_on_current_assignee_id"
     t.index ["deleted_by_id"], name: "index_bundles_on_deleted_by_id"

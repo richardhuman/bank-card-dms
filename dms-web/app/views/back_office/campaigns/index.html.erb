@@ -21,7 +21,7 @@
                     <td><%= campaign.description %></td>
                     <td><%= campaign.created_by.first_name %></td>
                     <td><%= campaign.created_at.to_formatted_s(:timestamp) %></td>
-                    <td><%= link_to 'Edit', edit_back_office_campaign_path(campaign), data: { turbo_frame: "_top" }  %></td>
+                    <td><%= link_to t("forms.campaign.actions.edit"), edit_back_office_campaign_path(campaign), data: { turbo_frame: "_top" }  %></td>
                 </tr>
             <% end %>
             </tbody>

@@ -1,0 +1,32 @@
+<%= render layout: "shared/turbo_sub_layout" do %>
+
+    <%= form_with(model: [:agents, @bundle]) do |form| %>
+        <div class="content-section">
+            <h6 class="content-header"><%= t("activerecord.models.bundle") %>: <%= @bundle.bundle_number %> </h6>
+
+            <div>
+                <%= t("activerecord.attributes.bundle.current_quantity") %>: <%= @bundle.current_quantity %>
+            </div>
+        </div>
+
+
+        <div class="content-section">
+            <%= form.label :sale_quantity %>
+            <%= form.text_field :sale_quantity %>
+            <br/>
+            <%= form.submit "Capture sale", class: "button button-primary" %>
+        </div>
+
+        <div class="content-section">
+            <%= form.label :transfer_quantity %>
+            <%= form.text_field :transfer_quantity %>
+            <br/>
+            <%= form.label :new_assignee %>
+            <%= form.collection_select :new_assignee_id, @sub_agents, :id, :full_name_with_identifier,
+                                       { include_blank: true  } %>
+            <br/>
+            <%= form.submit :transfer, class: "button button-primary" %>
+        </div>
+    <% end %>
+
+<% end %>

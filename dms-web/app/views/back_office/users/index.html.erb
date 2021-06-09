@@ -26,7 +26,7 @@
                     <td><%= user.manager&.first_name %></td>
                     <td><%= user.user_role.humanize %></td>
                     <td><%= user.created_at.to_formatted_s(:standard) %></td>
-                    <td><%= link_to 'Edit', edit_back_office_user_path(user) %></td>
+                    <td><%= link_to t("forms.user.actions.edit"), edit_back_office_user_path(user) %></td>
                 </tr>
             <% end %>
             </tbody>

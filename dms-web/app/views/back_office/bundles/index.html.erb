@@ -12,6 +12,7 @@
                 <th><%= t("activerecord.attributes.bundle.loaded_at") %></th>
                 <th><%= t("activerecord.attributes.bundle.loaded_by") %></th>
                 <th><%= t("activerecord.attributes.bundle.current_assignee") %></th>
+                <th><%= t("activerecord.attributes.bundle.released") %></th>
                 <th></th>
             </tr>
             </thead>
@@ -25,7 +26,8 @@
                     <td><%= bundle.created_at.to_formatted_s(:timestamp) %></td>
                     <td><%= bundle.loaded_by&.first_name %></td>
                     <td><%= bundle.current_assignee&.first_name %></td>
-                    <td><%= link_to 'Edit', edit_back_office_bundle_path(bundle) %></td>
+                    <td><%= bundle.released_at&.to_formatted_s(:timestamp) %></td>
+                    <td><%= link_to t("forms.bundle.actions.edit"), edit_back_office_bundle_path(bundle) %></td>
                 </tr>
             <% end %>
             </tbody>

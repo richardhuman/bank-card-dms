@@ -3,14 +3,16 @@
 class User < ApplicationRecord
   belongs_to :manager, class_name: "User", optional: true
 
+  has_many :sub_agents, class_name: "User", foreign_key: :manager_id
+
   has_secure_password
 
   validate :at_least_one_identifier
   validates :manager, presence: true, if: proc { self.sales_agent_role? }
 
   scope :active, -> () { where(deleted_at: nil) }
-  scope :order_name, -> () { order(first_name: :asc) }
   scope :managed_by, -> (user) { where(manager: user) }
+  scope :order_name, -> () { order(first_name: :asc) }
 
   enum user_role: {
     super_user: 1,
