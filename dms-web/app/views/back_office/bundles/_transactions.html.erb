@@ -1,21 +1,21 @@
 <div class="content-section">
-    <h6 class="content-header"><%= t("activerecord.models.card_bundle_transaction") %></h6>
+    <h6 class="content-header"><%= t("activerecord.models.bundle_transaction") %></h6>
 
     <table class="u-full-width">
         <thead>
         <tr>
             <th><%= t("activerecord.attributes.shared.created_at") %></th>
-            <th><%= t("activerecord.attributes.card_bundle_transaction.user") %></th>
-            <th><%= t("activerecord.attributes.card_bundle_transaction.transaction_type") %></th>
-            <th><%= t("activerecord.attributes.card_bundle_transaction.card_quantity") %></th>
-            <th><%= t("activerecord.attributes.card_bundle_transaction.transferrer") %></th>
-            <th><%= t("activerecord.attributes.card_bundle_transaction.transferee") %></th>
+            <th><%= t("activerecord.attributes.bundle_transaction.user") %></th>
+            <th><%= t("activerecord.attributes.bundle_transaction.transaction_type") %></th>
+            <th><%= t("activerecord.attributes.bundle_transaction.card_quantity") %></th>
+            <th><%= t("activerecord.attributes.bundle_transaction.transferrer") %></th>
+            <th><%= t("activerecord.attributes.bundle_transaction.transferee") %></th>
             <th></th>
         </tr>
         </thead>
 
         <tbody>
-        <% card_bundle.transactions.chronologically.each do |txn| %>
+        <% bundle.transactions.chronologically.each do |txn| %>
             <tr id="<%= dom_id(txn) %>">
                 <td><%= txn.created_at.to_formatted_s(:timestamp) %></td>
                 <td><%= txn.user&.first_name %></td>

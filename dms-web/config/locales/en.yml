@@ -53,8 +53,8 @@ en:
 
   activerecord:
     models:
-      card_bundle: Card bundle
-      card_bundle_transaction: Transactions
+      bundle: Card bundle
+      bundle_transaction: Transactions
     attributes:
       shared:
         created_at: Created at
@@ -62,7 +62,7 @@ en:
         title: Title
         description: Description
         created_by: Created by
-      card_bundle:
+      bundle:
         bundle_number: Bundle number
         status: Status
         card_quantity: Quantity of cards
@@ -70,7 +70,7 @@ en:
         loaded_at: Loaded
         loaded_by: Loaded by
         parent_bundle: Parent bundle
-      card_bundle_transaction:
+      bundle_transaction:
         user: User
         transferrer: Transferrer
         transferee: Transferee
@@ -83,7 +83,7 @@ en:
         cancel: Cancel
         confirm_cancel: Are you sure you wish to cancel editing and revert all changes?
         confirm_delete: Are you sure you wish to delete this item? This cannot be undone.
-    card_bundle:
+    bundle:
       actions:
         create: Add bundle
         update: Update bundle

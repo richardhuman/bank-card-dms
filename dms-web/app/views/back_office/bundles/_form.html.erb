@@ -1,15 +1,15 @@
-<%= form_with(model: [:back_office, card_bundle]) do |form| %>
+<%= form_with(model: [:back_office, bundle]) do |form| %>
 <!--    data: { controller: "flash-notice", action: "turbo:submit-end->flash-notice#startClose" }-->
-    <%= render "/shared/form_errors", active_model_object: card_bundle %>
+    <%= render "/shared/form_errors", active_model_object: bundle %>
 
     <div>
         <%= form.label :bundle_number %>
-        <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.card_bundle.bundle_number") %>
+        <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.bundle.bundle_number") %>
     </div>
 
     <div>
         <%= form.label :card_quantity %>
-        <%= form.text_field :card_quantity, placeholder: t("activerecord.attributes.card_bundle.card_quantity") %>
+        <%= form.text_field :card_quantity, placeholder: t("activerecord.attributes.bundle.card_quantity") %>
     </div>
 
     <div>
@@ -25,18 +25,18 @@
     </div>
 
     <div class="form-actions">
-        <%= link_to t("forms.shared.actions.cancel"), back_office_card_bundles_path,
+        <%= link_to t("forms.shared.actions.cancel"), back_office_bundles_path,
                     class: "button",
                     data: { confirm: t("forms.shared.actions.confirm_cancel") }%>
-        <%= form.submit card_bundle.id ?
-                                t("forms.card_bundle.actions.update") :
-                                t("forms.card_bundle.actions.create"),
+        <%= form.submit bundle.id ?
+                                t("forms.bundle.actions.update") :
+                                t("forms.bundle.actions.create"),
                         { class: "button-primary" } %>
     </div>
 
-    <% if card_bundle.id %>
+    <% if bundle.id %>
         <div class="form-actions danger">
-            <%= link_to t("forms.card_bundle.actions.delete"), [:back_office, card_bundle], method: :delete,
+            <%= link_to t("forms.bundle.actions.delete"), [:back_office, bundle], method: :delete,
                         data: { confirm: t("forms.shared.actions.confirm_delete")}, class: "button button-danger"  %>
         </div>
     <% end %>

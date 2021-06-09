@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class CardBundleTransaction < ApplicationRecord
-  belongs_to :card_bundle
+class BundleTransaction < ApplicationRecord
+  belongs_to :bundle
   belongs_to :user
   belongs_to :transferrer, class_name: "User", optional: true
   belongs_to :transferee, class_name: "User", optional: true

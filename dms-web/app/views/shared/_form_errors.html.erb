@@ -1,9 +1,8 @@
 <% if active_model_object.errors.any? %>
     <div class="form-errors-notification">
-        <ul>
-            <% active_model_object.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-            <% end %>
-        </ul>
+        <% active_model_object.errors.each do |error| %>
+            <%= error.full_message %>
+            <br/>
+        <% end %>
     </div>
 <% end %>

@@ -1,6 +1,6 @@
 <%= form_with(model: user_session) do |form| %>
 
-    <%= render "/shared/form_errors", active_model_object:  user_session %>
+    <%= render "shared/form_errors", active_model_object: user_session %>
 
     <% #= form.label :username,  %>
     <%= form.text_field :username, class: "u-full-width", placeholder: t("user_logins.form.username_placeholder") %>

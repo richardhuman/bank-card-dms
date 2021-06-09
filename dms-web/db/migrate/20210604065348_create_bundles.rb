@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateCardBundles < ActiveRecord::Migration[6.1]
+class CreateBundles < ActiveRecord::Migration[6.1]
   def change
-    create_table :card_bundles do |t|
+    create_table :bundles do |t|
       t.string :bundle_number, null: false
       t.integer :status, null: false, default: 1
       t.integer :card_quantity, null: false
@@ -12,7 +12,7 @@ class CreateCardBundles < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :card_bundles, :bundle_number, unique: true
-    add_reference :card_bundles, :parent_bundle, foreign_key: { to_table: :users}
+    add_index :bundles, :bundle_number, unique: true
+    add_reference :bundles, :parent_bundle, foreign_key: { to_table: :users}
   end
 end

@@ -17,7 +17,7 @@ class UserSessionsController < ApplicationController
 
     @user = @user_session.login
     if @user.nil?
-      render :new
+      render :new, status: :unprocessable_entity
     else
       handle_successful_login(@user)
     end
@@ -50,8 +50,9 @@ class UserSessionsController < ApplicationController
     end
 
     def get_home_path_for_user(user)
-      if user.role_back_office? || user.role_superuser?
-        back_office_card_bundles_path
+      if user.role_back_office? || user.role_super_user?
+        puts "redirect #{back_office_bundles_path}"
+        back_office_bundles_path
       else
         raise "Not supported yet"
       end

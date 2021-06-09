@@ -19,7 +19,7 @@ class BackOffice::CampaignsController < ApplicationController
     if @campaign.save
       redirect_to url_for(action: :edit, id: @campaign), notice: I18n.t("forms.campaign.notices.create")
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +27,7 @@ class BackOffice::CampaignsController < ApplicationController
     if @campaign.update(campaign_params)
       redirect_to url_for(action: :edit, id: @campaign), notice: I18n.t("forms.campaign.notices.update")
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

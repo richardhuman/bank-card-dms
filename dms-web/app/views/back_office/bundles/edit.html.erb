@@ -1,0 +1,12 @@
+<%= render layout: "back_office/shared/turbo_sub_layout" do %>
+
+    <div class="content-section">
+        <h6 class="content-header"><%= t("forms.bundle.actions.update") %></h6>
+        <%= render "form", bundle: @bundle %>
+    </div>
+
+    <div id="card-bundle-transactions">
+        <%= render "transactions", bundle: @bundle %>
+    </div>
+
+<% end %>

@@ -21,17 +21,8 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
     t.index ["name"], name: "index_barcode_symbologies_on_name", unique: true
   end
 
-  create_table "campaigns", charset: "utf8", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description", limit: 2000
-    t.bigint "created_by_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["created_by_id"], name: "index_campaigns_on_created_by_id"
-  end
-
-  create_table "card_bundle_transactions", charset: "utf8", force: :cascade do |t|
-    t.bigint "card_bundle_id", null: false
+  create_table "bundle_transactions", charset: "utf8", force: :cascade do |t|
+    t.bigint "bundle_id", null: false
     t.integer "transaction_type"
     t.bigint "user_id", null: false
     t.bigint "transferrer_id"
@@ -40,13 +31,13 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["card_bundle_id"], name: "index_card_bundle_transactions_on_card_bundle_id"
-    t.index ["transferee_id"], name: "index_card_bundle_transactions_on_transferee_id"
-    t.index ["transferrer_id"], name: "index_card_bundle_transactions_on_transferrer_id"
-    t.index ["user_id"], name: "index_card_bundle_transactions_on_user_id"
+    t.index ["bundle_id"], name: "index_bundle_transactions_on_bundle_id"
+    t.index ["transferee_id"], name: "index_bundle_transactions_on_transferee_id"
+    t.index ["transferrer_id"], name: "index_bundle_transactions_on_transferrer_id"
+    t.index ["user_id"], name: "index_bundle_transactions_on_user_id"
   end
 
-  create_table "card_bundles", charset: "utf8", force: :cascade do |t|
+  create_table "bundles", charset: "utf8", force: :cascade do |t|
     t.string "bundle_number", null: false
     t.integer "status", default: 1, null: false
     t.integer "card_quantity", null: false
@@ -58,11 +49,20 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
     t.bigint "parent_bundle_id"
     t.timestamp "deleted_at"
     t.bigint "deleted_by_id"
-    t.index ["bundle_number"], name: "index_card_bundles_on_bundle_number", unique: true
-    t.index ["current_assignee_id"], name: "index_card_bundles_on_current_assignee_id"
-    t.index ["deleted_by_id"], name: "index_card_bundles_on_deleted_by_id"
-    t.index ["loaded_by_id"], name: "index_card_bundles_on_loaded_by_id"
-    t.index ["parent_bundle_id"], name: "index_card_bundles_on_parent_bundle_id"
+    t.index ["bundle_number"], name: "index_bundles_on_bundle_number", unique: true
+    t.index ["current_assignee_id"], name: "index_bundles_on_current_assignee_id"
+    t.index ["deleted_by_id"], name: "index_bundles_on_deleted_by_id"
+    t.index ["loaded_by_id"], name: "index_bundles_on_loaded_by_id"
+    t.index ["parent_bundle_id"], name: "index_bundles_on_parent_bundle_id"
+  end
+
+  create_table "campaigns", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description", limit: 2000
+    t.bigint "created_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_campaigns_on_created_by_id"
   end
 
   create_table "cards", charset: "utf8", force: :cascade do |t|
@@ -92,15 +92,15 @@ ActiveRecord::Schema.define(version: 2021_06_07_120758) do
     t.index ["owner_id"], name: "index_users_on_owner_id"
   end
 
+  add_foreign_key "bundle_transactions", "bundles"
+  add_foreign_key "bundle_transactions", "users"
+  add_foreign_key "bundle_transactions", "users", column: "transferee_id"
+  add_foreign_key "bundle_transactions", "users", column: "transferrer_id"
+  add_foreign_key "bundles", "users", column: "current_assignee_id"
+  add_foreign_key "bundles", "users", column: "deleted_by_id"
+  add_foreign_key "bundles", "users", column: "loaded_by_id"
+  add_foreign_key "bundles", "users", column: "parent_bundle_id"
   add_foreign_key "campaigns", "users", column: "created_by_id"
-  add_foreign_key "card_bundle_transactions", "card_bundles"
-  add_foreign_key "card_bundle_transactions", "users"
-  add_foreign_key "card_bundle_transactions", "users", column: "transferee_id"
-  add_foreign_key "card_bundle_transactions", "users", column: "transferrer_id"
-  add_foreign_key "card_bundles", "users", column: "current_assignee_id"
-  add_foreign_key "card_bundles", "users", column: "deleted_by_id"
-  add_foreign_key "card_bundles", "users", column: "loaded_by_id"
-  add_foreign_key "card_bundles", "users", column: "parent_bundle_id"
-  add_foreign_key "cards", "card_bundles", column: "bundle_id"
+  add_foreign_key "cards", "bundles"
   add_foreign_key "users", "users", column: "owner_id"
 end

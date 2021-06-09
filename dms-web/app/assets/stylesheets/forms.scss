@@ -27,11 +27,8 @@ form {
 
     .form-errors-notification {
         color: $colour_error;
-        ul {
-            li {
-                line-height: 1
-            }
-        }
+        margin-bottom: 1rem;
+
     }
 
 }
