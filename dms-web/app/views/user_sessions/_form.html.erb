@@ -3,11 +3,11 @@
     <%= render "shared/form_errors", active_model_object: user_session %>
 
     <% #= form.label :username,  %>
-    <%= form.text_field :username, class: "u-full-width", placeholder: t("user_logins.form.username_placeholder") %>
+    <%= form.text_field :username, class: "u-full-width", placeholder: t("user_logins.form.username_placeholder"), data: { test_id: "login-username" } %>
 
-    <%= form.password_field :password, class: "u-full-width", placeholder: t("user_logins.form.password_placeholder") %>
+    <%= form.password_field :password, class: "u-full-width", placeholder: t("user_logins.form.password_placeholder"), data: { test_id: "login-password" } %>
 
-    <%= form.submit t("user_logins.form.submit"), { class: "button button-primary" } %>
+    <%= form.submit t("user_logins.form.submit"), { class: "button button-primary", data: { test_id: "login-submit" }} %>
 
 <% end %>
 

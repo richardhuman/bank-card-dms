@@ -8,7 +8,7 @@
                 <li class="navbar-item"><%= link_to t("main_menu.users"), back_office_users_path, class: "navbar-link" %></li>
                 <li class="navbar-item" style="float: right;" data-controller="popover">
                     <%= link_to current_user.default_name, "#", class: "navbar-link ", style: "margin-right: 0;",
-                                data: { action: "click->popover#toggle" } %>
+                                data: { action: "click->popover#toggle", test_id: "navbar-link-current-user" } %>
                     <div class="popover" data-popover-target="popoverContainer">
                         <ul class="popover-list">
                             <li class="popover-item"><%= link_to t("main_menu.account_settings"), "#", class: "popover-link" %></li>
