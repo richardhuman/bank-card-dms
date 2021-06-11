@@ -2,6 +2,8 @@
 
 module Agents
   class BaseController < ApplicationController
-    layout "agents"
+    def sub_layout
+      "agents"
+    end
   end
 end

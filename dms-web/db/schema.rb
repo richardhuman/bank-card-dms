@@ -24,17 +24,17 @@ ActiveRecord::Schema.define(version: 2021_06_09_204609) do
   create_table "bundle_transactions", charset: "utf8", force: :cascade do |t|
     t.bigint "bundle_id", null: false
     t.integer "transaction_type"
-    t.bigint "user_id", null: false
-    t.bigint "transferrer_id"
+    t.bigint "logged_by_id", null: false
+    t.bigint "executed_by_id", null: false
     t.bigint "transferee_id"
     t.integer "quantity", null: false
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bundle_id"], name: "index_bundle_transactions_on_bundle_id"
+    t.index ["executed_by_id"], name: "index_bundle_transactions_on_executed_by_id"
+    t.index ["logged_by_id"], name: "index_bundle_transactions_on_logged_by_id"
     t.index ["transferee_id"], name: "index_bundle_transactions_on_transferee_id"
-    t.index ["transferrer_id"], name: "index_bundle_transactions_on_transferrer_id"
-    t.index ["user_id"], name: "index_bundle_transactions_on_user_id"
   end
 
   create_table "bundles", charset: "utf8", force: :cascade do |t|
@@ -96,13 +96,13 @@ ActiveRecord::Schema.define(version: 2021_06_09_204609) do
   end
 
   add_foreign_key "bundle_transactions", "bundles"
-  add_foreign_key "bundle_transactions", "users"
+  add_foreign_key "bundle_transactions", "users", column: "executed_by_id"
+  add_foreign_key "bundle_transactions", "users", column: "logged_by_id"
   add_foreign_key "bundle_transactions", "users", column: "transferee_id"
-  add_foreign_key "bundle_transactions", "users", column: "transferrer_id"
+  add_foreign_key "bundles", "bundles", column: "parent_bundle_id"
   add_foreign_key "bundles", "users", column: "current_assignee_id"
   add_foreign_key "bundles", "users", column: "deleted_by_id"
   add_foreign_key "bundles", "users", column: "loaded_by_id"
-  add_foreign_key "bundles", "users", column: "parent_bundle_id"
   add_foreign_key "campaigns", "users", column: "created_by_id"
   add_foreign_key "cards", "bundles"
   add_foreign_key "users", "users", column: "manager_id"

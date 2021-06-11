@@ -1,8 +1,0 @@
-<%= turbo_frame_tag get_main_turbo_frame do %>
-    <div>
-        <% if notice %>
-            <p id="notice" class="notice" data-controller="flash-notice" ><%= notice %></p>
-        <% end %>
-        <%= yield %>
-    </div>
-<% end %>

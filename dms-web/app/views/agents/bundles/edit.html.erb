@@ -1,32 +1,50 @@
-<%= render layout: "shared/turbo_sub_layout" do %>
+<%= render layout: "layouts/turbo_sub_layout" do %>
 
-    <%= form_with(model: [:agents, @bundle]) do |form| %>
-        <div class="content-section">
-            <h6 class="content-header"><%= t("activerecord.models.bundle") %>: <%= @bundle.bundle_number %> </h6>
+    <div class="content-section">
+        <h6 class="content-header"><%= t("activerecord.models.bundle") %>: <%= @bundle.bundle_number %> </h6>
+        <div>
+            <%= t("activerecord.attributes.bundle.current_quantity") %>: <%= @bundle.current_quantity %>
+        </div>
+    </div>
 
-            <div>
-                <%= t("activerecord.attributes.bundle.current_quantity") %>: <%= @bundle.current_quantity %>
+    <% disabled = @bundle_sale_action.nil? %>
+    <div class="content-section">
+        <%= form_with(model: @bundle_sale_action, url: agents_bundle_path(@bundle), method: :patch) do |form| %>
+            <%= render "shared/form_errors", active_model_object: @bundle_sale_action %>
+            <div class="row-flex">
+                <div>
+                    <%= form.label :quantity, t("activerecord.attributes.bundle_action.sale_quantity") %>
+                    <%= form.text_field :quantity, disabled: disabled %>
+                </div>
+                <div class="form-actions">
+                    <%= form.hidden_field :action %>
+                    <%= form.submit t("forms.bundle.actions.capture_sale"), name: :capture_sale, class: "button button-primary", disabled: disabled %>
+                </div>
             </div>
-        </div>
+        <% end %>
+    </div>
 
-
-        <div class="content-section">
-            <%= form.label :sale_quantity %>
-            <%= form.text_field :sale_quantity %>
-            <br/>
-            <%= form.submit "Capture sale", class: "button button-primary" %>
-        </div>
-
-        <div class="content-section">
-            <%= form.label :transfer_quantity %>
-            <%= form.text_field :transfer_quantity %>
-            <br/>
-            <%= form.label :new_assignee %>
-            <%= form.collection_select :new_assignee_id, @sub_agents, :id, :full_name_with_identifier,
-                                       { include_blank: true  } %>
-            <br/>
-            <%= form.submit :transfer, class: "button button-primary" %>
-        </div>
-    <% end %>
-
+    <div class="content-section">
+        <% disabled = @bundle_transfer_action.nil? %>
+        <%= form_with(model: @bundle_transfer_action, url: agents_bundle_path(@bundle), method: :patch, class: ('disabled' if disabled)) do |form| %>
+            <%= render "shared/form_errors", active_model_object: @bundle_transfer_action %>
+            <div class="row-flex">
+                <div>
+                    <%= form.label :quantity, t("activerecord.attributes.bundle_action.transfer_quantity") %>
+                    <%= form.text_field :quantity, disabled: disabled %>
+                </div>
+                <div>
+                    <%= form.label :transferee_id %>
+                    <%= form.collection_select :transferee_id, @sub_agents, :id, :full_name_with_identifier,
+                                               { include_blank: true }, { disabled: disabled } %>
+                </div>
+                <div class="form-actions">
+                    <%= form.hidden_field :action %>
+                    <%= form.submit t("forms.bundle.actions.transfer"), name: :transfer, class: "button button-primary",
+                                    disabled: disabled,
+                                    data: { confirm: t("forms.bundle.confirmations.transfer") } %>
+                </div>
+            </div>
+        <% end %>
+    </div>
 <% end %>

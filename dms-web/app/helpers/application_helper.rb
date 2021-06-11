@@ -8,4 +8,9 @@ module ApplicationHelper
   def get_main_turbo_frame
     "turbo-main-content-frame"
   end
+
+  def nb(html)
+    return html if html.blank?
+    raw(html.gsub("-", "&#8209;").gsub(" ", "&nbsp;"))
+  end
 end

@@ -2,6 +2,8 @@
 
 module BackOffice
   class BaseController < ApplicationController
-    layout "back_office"
+    def sub_layout
+      "back_office"
+    end
   end
 end

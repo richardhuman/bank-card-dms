@@ -5,10 +5,9 @@
         <thead>
         <tr>
             <th><%= t("activerecord.attributes.shared.created_at") %></th>
-            <th><%= t("activerecord.attributes.bundle_transaction.user") %></th>
+            <th><%= t("activerecord.attributes.bundle_transaction.executed_by") %></th>
             <th><%= t("activerecord.attributes.bundle_transaction.transaction_type") %></th>
             <th><%= t("activerecord.attributes.bundle_transaction.quantity") %></th>
-            <th><%= t("activerecord.attributes.bundle_transaction.transferrer") %></th>
             <th><%= t("activerecord.attributes.bundle_transaction.transferee") %></th>
             <th></th>
         </tr>
@@ -18,11 +17,19 @@
         <% bundle.transactions.chronologically.each do |txn| %>
             <tr id="<%= dom_id(txn) %>">
                 <td><%= txn.created_at.to_formatted_s(:timestamp) %></td>
-                <td><%= txn.user&.first_name %></td>
-                <td><%= txn.transaction_type.humanize %></td>
+                <td><%= txn.executed_by&.default_name %></td>
+                <td data-controller="popover">
+                    <%= link_to txn.transaction_type.humanize, "#", data: { action: "click->popover#toggle" } %>
+                    <div class="popover" data-popover-target="popoverContainer">
+                        <ul class="popover-list">
+                            <li class="popover-item popover-text">ID: <%= txn.id %></li>
+                            <li class="popover-item popover-text"><%= t("activerecord.attributes.bundle_transaction.logged_by") %>: <%= txn.logged_by.default_name %></li>
+                            <li class="popover-item popover-text"><%= t("activerecord.attributes.bundle_transaction.description") %>: <%= txn.description %></li>
+                        </ul>
+                    </div>
+                </td>
                 <td><%= txn.quantity %></td>
-                <td><%= txn.transferrer&.first_name %></td>
-                <td><%= txn.transferee&.first_name %></td>
+                <td><%= txn.transferee&.default_name %></td>
             </tr>
         <% end %>
         </tbody>

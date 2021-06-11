@@ -33,7 +33,7 @@ class BackOffice::CampaignsController < BackOffice::BaseController
 
   def destroy
     @campaign.destroy
-    redirect_to campaigns_url, notice: I18n.t("forms.campaign.notices.delete")
+    redirect_to back_office_campaigns_path, notice: I18n.t("forms.campaign.notices.delete")
   end
 
   private

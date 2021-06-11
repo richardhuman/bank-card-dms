@@ -13,8 +13,7 @@ form {
         }
     }
 
-    .form-actions.danger {
-    }
+    .form-actions.danger { }
 
     .field_with_errors {
         padding: 2px;
@@ -31,4 +30,22 @@ form {
 
     }
 
+    input:disabled, select:disabled, button:disabled {
+        color: $light_light_gray
+    }
+
+    input[type="submit"]:disabled,  {
+        background-color: $light_light_gray;
+        border-color: $light_light_gray;
+    }
+
+}
+
+form.disabled {
+    label {
+        color: $light_light_gray;
+    }
+    input[type="submit"]:focus {
+
+    }
 }

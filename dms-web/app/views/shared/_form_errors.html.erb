@@ -1,4 +1,4 @@
-<% if active_model_object.errors.any? %>
+<% if active_model_object && active_model_object.errors.any? %>
     <div class="form-errors-notification">
         <% active_model_object.errors.each do |error| %>
             <%= error.full_message %>

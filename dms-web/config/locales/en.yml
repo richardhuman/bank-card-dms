@@ -31,7 +31,7 @@
 
 en:
   main_menu:
-    home: Home
+    home: DMS
     campaigns: Campaigns
     bundles: Bundles
     agents: Agents
@@ -56,6 +56,7 @@ en:
     models:
       bundle: Bundle
       bundle_transaction: Transactions
+      bundle_action:
     attributes:
       shared:
         created_at: Created at
@@ -73,12 +74,15 @@ en:
         parent_bundle: Parent bundle
         released: Released to agent
         released_at: Released at
+        transferee: Transferee
+        transfer_quantity: Transfer quantity
       bundle_transaction:
-        user: User
-        transferrer: Transferrer
+        logged_by: Logged by
+        executed_by: Executed by
         transferee: Transferee
         quantity: Quantity
         transaction_type: Type
+        description: Description
       user:
         email: Email
         contact: Contact
@@ -88,6 +92,24 @@ en:
         surname: Surname
         manager: Manager
         user_role: Role
+      bundle_action:
+        quantity: Quantity
+        sale_quantity: Sale quantity
+        transfer_quantity: Transfer quantity
+    errors:
+      models:
+        bundle:
+          only_changes_on_actionable: Changes may only be made to bundles that have been released to agents and are not
+            completed yet.
+
+
+  activemodel:
+    errors:
+      models:
+        bundle_action:
+          invalid_sale_quantity: cannot be more than the current quantity in the bundle.
+    attributes:
+
 
   forms:
     shared:
@@ -101,10 +123,15 @@ en:
         update: Update bundle
         edit: Edit
         delete: Delete bundle
+        capture_sale: Capture sale
+        transfer: Transfer
+      confirmations:
+        transfer: "Are you sure you wish to transfer these units from this bundle? This action will create a new bundle."
       notices:
-        create: The bundle was succesfully created.
-        update: The bundle was succesfully updated.
-        delete: The bundle was succesfully deleted.
+        create: The bundle was successfully created.
+        update: The bundle was successfully updated.
+        delete: The bundle was successfully deleted.
+        actionable: This bundle is no longer actionable.
     campaign:
       actions:
         create: Add campaign
@@ -112,9 +139,9 @@ en:
         edit: Edit
         delete: Delete campaign
       notices:
-        create: The campaign was succesfully created.
-        update: The campaign was succesfully updated.
-        delete: The campaign was succesfully deleted.
+        create: The campaign was successfully created.
+        update: The campaign was successfully updated.
+        delete: The campaign was successfully deleted.
     user:
       actions:
         create: Add user
@@ -122,9 +149,14 @@ en:
         edit: Edit
         delete: Delete user
       notices:
-        create: The user was succesfully created.
-        update: The user was succesfully updated.
-        delete: The user was succesfully deleted.
+        create: The user was successfully created.
+        update: The user was successfully updated.
+        delete: The user was successfully deleted.
+    bundle_action:
+      notices:
+        sale: "The sale of %{quantity} units was successfully recorded."
+        transfer: "The transfer of %{quantity} units, transferred to %{name}, was successfully recorded."
+
 
   agent_bundles:
     my_bundle:

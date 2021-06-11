@@ -32,6 +32,10 @@ class User < ApplicationRecord
     "#{first_name} #{surname}"
   end
 
+  def default_name
+    first_name # or full_name
+  end
+
   def identifier
     !mobile_number.blank? ? mobile_number : email
   end

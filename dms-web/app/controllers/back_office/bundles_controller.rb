@@ -9,7 +9,7 @@ class BackOffice::BundlesController < BackOffice::BaseController
   end
 
   def new
-    @bundle = Bundle.new
+    @bundle = Bundle.new(current_quantity: nil)
   end
 
   def edit; end
@@ -20,7 +20,6 @@ class BackOffice::BundlesController < BackOffice::BaseController
     if @bundle.save
       redirect_to url_for(action: :edit, id: @bundle), notice: I18n.t("forms.bundle.notices.create")
     else
-      puts @bundle.errors
       render :new, status: :unprocessable_entity
     end
   end

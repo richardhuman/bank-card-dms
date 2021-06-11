@@ -17,3 +17,14 @@ Rails.start();
 // import "channels";
 // ActiveStorage.start();
 
+// document.addEventListener('turbo:load', function () {
+//   console.log('turbo load')
+// })
+//
+// document.addEventListener('turbo:render', function () {
+//   console.log('turbo render')
+// })
+//
+// document.addEventListener('turbo:visit', function () {
+//   console.log('turbo visit')
+// })

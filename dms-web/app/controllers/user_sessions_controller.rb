@@ -53,7 +53,7 @@ class UserSessionsController < ApplicationController
       if user.back_office_role? || user.super_user_role?
         back_office_bundles_path
       else
-        agents_bundle_path
+        agents_bundles_path
       end
     end
 end

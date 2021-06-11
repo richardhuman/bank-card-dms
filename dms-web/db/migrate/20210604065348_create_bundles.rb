@@ -14,6 +14,6 @@ class CreateBundles < ActiveRecord::Migration[6.1]
       t.timestamps
     end
     add_index :bundles, :bundle_number, unique: true
-    add_reference :bundles, :parent_bundle, foreign_key: { to_table: :users }
+    add_reference :bundles, :parent_bundle, foreign_key: { to_table: :bundles }
   end
 end
