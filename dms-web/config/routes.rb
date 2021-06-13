@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :campaigns, except: [:show]
     resources :bundles, except: [:show]
     resources :users, except: [:show]
+    get "dashboard" => "dashboard#index"
   end
 
   namespace :agents do

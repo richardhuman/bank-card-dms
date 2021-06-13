@@ -140,6 +140,7 @@ h3 { font-size: 3.0rem; line-height: 1.3;  letter-spacing: -.1rem; }
 h4 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem; }
 h5 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -.05rem; }
 h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
+table th, div.table div.th { font-weight: bold }
 
 /* Larger than phablet */
 @media (min-width: 550px) {
@@ -322,14 +323,20 @@ pre > code {
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+div.th,
+div.td,
 th,
 td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #E1E1E1; }
+div.th:first-child,
+div.td:first-child,
 th:first-child,
 td:first-child {
   padding-left: 0; }
+div.th:last-child,
+div.td:last-child,
 th:last-child,
 td:last-child {
   padding-right: 0; }

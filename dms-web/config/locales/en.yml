@@ -32,6 +32,7 @@
 en:
   main_menu:
     home: DMS
+    dashboard: Dashboard
     campaigns: Campaigns
     bundles: Bundles
     agents: Agents
@@ -46,6 +47,7 @@ en:
       errors:
         failed: The user could not be found by either email or mobile number or the password was incorrect.
         unactivated: The user has not been activated yet. They need to accept their invitation.
+
   user_invitations:
     actions:
       claimed: Your account has been activated. Please change your password.
@@ -58,9 +60,6 @@ en:
       header: My bundles
     team_bundles:
       header: My team's bundles
-
-
-
 
   activerecord:
     models:
@@ -181,18 +180,12 @@ en:
         sale: "The sale of %{quantity} units was successfully recorded."
         transfer: "The transfer of %{quantity} units, transferred to %{name}, was successfully recorded."
 
+  stats:
+    campaign:
+      header: Campaign summary
+      bundle_total: Total bundles
+      cards_total: Total cards
+      cards_sold: Cards sold
+    bundle_transactions:
+      header: Recent transactions
 
-
-
-
-
-#  current_bundle:
-#    transactions:
-#      title: Transactions
-
-
-#  helpers:
-#    label:
-#      user_logins:
-#        username: Mobile number or email
-#        password: Password

@@ -1,0 +1,18 @@
+<div class="table u-full-width">
+    <div class="thead">
+        <div class="tr">
+            <div class="th"><%= t("activerecord.attributes.campaign.title") %></div>
+            <div class="th"><%= t("stats.campaign.bundle_total") %></div>
+            <div class="th"><%= t("stats.campaign.cards_total") %></div>
+            <div class="th"><%= t("stats.campaign.cards_sold") %></div>
+        </div>
+    </div>
+
+    <% open_campaigns.each do |campaign| %>
+        <div class="tbody" >
+            <%= turbo_stream_from campaign %>
+            <%= render "campaign_stat_row", campaign: campaign %>
+        </div>
+    <% end %>
+</div>
+

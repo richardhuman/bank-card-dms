@@ -4,14 +4,16 @@ class Campaign < ApplicationRecord
   include CurrentUser
 
   belongs_to :created_by, class_name: "User"
-  has_many :bundle
+  has_many :bundles
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 2000 }
 
-  after_initialize :track_create_user
+  before_create :track_create_user
 
   scope :chronologically, -> () { order(created_at: :asc) }
+
+  after_update_commit -> { broadcast_replace_later_to self, partial: "back_office/dashboard/campaign_stat_row" }
 
   enum status: {
     open: 10,

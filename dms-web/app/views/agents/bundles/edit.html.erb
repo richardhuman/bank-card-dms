@@ -3,7 +3,7 @@
     <div class="content-section">
         <h6 class="content-header"><%= t("activerecord.models.bundle") %>: <%= @bundle.bundle_number %> </h6>
         <div>
-            <%= t("activerecord.attributes.bundle.current_quantity") %>: <%= @bundle.current_quantity %>
+            <%= t("activerecord.attributes.bundle.current_quantity") %>: <%= @bundle.current_quantity %> / <%= @bundle.initial_quantity %>
         </div>
         <div>
             <%= t("activerecord.attributes.bundle.campaign") %>: <%= @bundle.campaign.title %>

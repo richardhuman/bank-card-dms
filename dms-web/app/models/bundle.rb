@@ -21,11 +21,13 @@ class Bundle < ApplicationRecord
   scope :assigned_to, -> (user) { where(current_assignee: user) }
   scope :chronologically, -> () { order(created_at: :asc) }
   scope :available_as_parent, -> () { loaded_status.or(released_status) }
+  scope :stats_include_initial_quantity, -> () { not_creation_mode_split_transfer }
 
   after_initialize :track_loaded_user
   before_create :track_loaded
   before_save :track_released
   before_save :track_completion
+  after_save -> () { campaign.touch }
 
   enum status: {
     empty: 1,
@@ -33,6 +35,12 @@ class Bundle < ApplicationRecord
     released: 10,
     completed: 15
   }, _suffix: "status"
+
+  enum creation_mode: {
+    loaded: 1,
+    complete_transfer: 5,
+    split_transfer: 10
+  }, _prefix: "creation_mode"
 
   def handle_delete!
     self.deleted_at = Time.new

@@ -15,7 +15,7 @@
 
         <tbody>
         <% bundle.transactions.chronologically.each do |txn| %>
-            <tr id="<%= dom_id(txn) %>">
+            <tr>
                 <td><%= txn.created_at.to_formatted_s(:timestamp) %></td>
                 <td><%= txn.executed_by&.default_name %></td>
                 <td data-controller="popover">

@@ -28,7 +28,7 @@ class BundleAction
     if sale_action?
       handle_sale!
     elsif transfer_action?
-      handle_transfer!
+      handle_split_transfer!
     else
       raise ApplicationError.new(message: "Unknown bundle action: #{action} for bundle #{bundle.id}", user: current_user)
     end
@@ -62,17 +62,19 @@ class BundleAction
       self.bundle.save!
     end
 
-    def handle_transfer!
+    def handle_split_transfer!
       ApplicationRecord.transaction do
         self.bundle.current_quantity -= self.quantity.to_i
         self.bundle.save!
 
         new_bundle_transfer_index = self.bundle.child_bundles.count + 1
         new_bundle = Bundle.create!(parent_bundle_id: self.bundle.id,
+                                    campaign_id: self.bundle.campaign_id,
                                     bundle_number: "#{self.bundle.bundle_number}-#{new_bundle_transfer_index}",
                                     current_quantity: self.quantity.to_i,
                                     current_assignee_id: self.transferee_id,
                                     loaded_by: self.current_user,
+                                    creation_mode: :split_transfer,
                                     released: true)
 
         self.bundle.transactions.create!(transaction_type: :transfer,

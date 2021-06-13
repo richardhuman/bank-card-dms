@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "dashboard_bundle_transactions" do %>
+    <% bundle_transactions = BundleTransaction.recent_transactions %>
+    <table class="table u-full-width">
+        <tbody>
+        <% bundle_transactions.each do |bundle_transaction| %>
+            <tr >
+                <td><%= bundle_transaction.bundle.campaign.title %></td>
+                <td><%= bundle_transaction.bundle.bundle_number %></td>
+                <td><%= bundle_transaction.created_at.to_formatted_s(:timestamp) %></td>
+                <td><%= bundle_transaction.executed_by&.default_name %></td>
+                <td data-controller="popover">
+                    <%= link_to bundle_transaction.transaction_type.humanize, "#", data: { action: "click->popover#toggle" } %>
+                    <div class="popover" data-popover-target="popoverContainer">
+                        <ul class="popover-list">
+                            <li class="popover-item popover-text">ID: <%= bundle_transaction.id %></li>
+                            <li class="popover-item popover-text"><%= t("activerecord.attributes.bundle_transaction.logged_by") %>
+                                : <%= bundle_transaction.logged_by.default_name %></li>
+                            <li class="popover-item popover-text"><%= t("activerecord.attributes.bundle_transaction.description") %>
+                                : <%= bundle_transaction.description %></li>
+                            <li class="popover-item popover-text"><%= t("activerecord.attributes.bundle_transaction.transferee") %>
+                                : <%= bundle_transaction.transferee&.default_name %></li>
+                        </ul>
+                    </div>
+                </td>
+                <td><%= bundle_transaction.quantity %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+<% end %>

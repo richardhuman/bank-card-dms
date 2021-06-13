@@ -1,0 +1,7 @@
+<%= turbo_frame_tag dom_id(campaign), class: "tr" do %>
+    <% total_cards = campaign.bundles.active.stats_include_initial_quantity.sum(:initial_quantity) %>
+    <div class="td"><%= campaign.title %></div>
+    <div class="td"><%= campaign.bundles.active.count %></div>
+    <div class="td"><%= total_cards %></div>
+    <div class="td"><%= total_cards - campaign.bundles.active.sum(:current_quantity) %></div>
+<% end %>

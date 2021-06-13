@@ -18,6 +18,9 @@ class User < ApplicationRecord
   scope :active, -> () { where.not(activated_at: nil) }
   scope :invited, -> () { where(activated_at: nil) }
   scope :managed_by, ->(user) { where(manager: user) }
+  scope :primary_agent, -> () { includes(:manager).
+                                    references(:manager).
+                                    where("managers_users.user_role" => User.user_roles[:back_office]) }
   scope :order_name, -> () { order(first_name: :asc) }
 
   enum user_role: {

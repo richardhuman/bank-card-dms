@@ -50,6 +50,6 @@ class BackOffice::BundlesController < BackOffice::BaseController
     def set_lookups
       @open_campaigns = Campaign.open_status
       @available_parent_bundles = Bundle.available_as_parent.chronologically
-      @agents = User.active.sales_agent_role.order_name
+      @agents = User.active.sales_agent_role.primary_agent.order_name
     end
 end

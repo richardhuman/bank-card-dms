@@ -4,9 +4,6 @@ class UserSessionsController < ApplicationController
   before_action :authenticate, only: []
 
   def new
-    puts "========="
-    puts flash.keys
-    puts flash["alert"]
     @user_session = UserSession.new
   end
 
@@ -54,7 +51,7 @@ class UserSessionsController < ApplicationController
 
     def get_home_path_for_user(user)
       if user.back_office_role?
-        back_office_bundles_path
+        url_for(controller: "back_office/dashboard", action: :index)
       else
         agents_bundles_path
       end

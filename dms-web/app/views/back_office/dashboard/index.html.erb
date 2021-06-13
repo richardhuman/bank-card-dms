@@ -1,0 +1,14 @@
+<%= render layout: "layouts/turbo_sub_layout" do %>
+
+    <div class="content-section" id="campaigns">
+        <h6 class="content-header"><%= t("stats.campaign.header") %></h6>
+        <%= render "campaign_stats", open_campaigns: @open_campaigns %>
+    </div>
+
+    <div class="content-section">
+        <h6 class="content-header"><%= t("stats.bundle_transactions.header") %></h6>
+        <%= turbo_stream_from "broadcast_dashboard_bundle_transactions" %>
+        <%= render "recent_transactions" %>
+    </div>
+
+<% end %>

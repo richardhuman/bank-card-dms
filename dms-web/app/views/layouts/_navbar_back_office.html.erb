@@ -3,15 +3,17 @@
         <ul class="navbar-list">
             <li class="navbar-item navbar-link"><%= t("main_menu.home") %></li>
             <% if current_user %>
-                <li class="navbar-item"><%= link_to t("main_menu.campaigns"), back_office_campaigns_path, class: "navbar-link" %></li>
-                <li class="navbar-item"><%= link_to t("main_menu.bundles"), back_office_bundles_path, class: "navbar-link" %></li>
-                <li class="navbar-item"><%= link_to t("main_menu.users"), back_office_users_path, class: "navbar-link" %></li>
+                <li class="navbar-item"><%= link_to t("main_menu.dashboard"), { controller: :dashboard, action: :index }, class: "navbar-link #{'active' if controller_name == "dashboard"}" %></li>
+                <li class="navbar-item"><%= link_to t("main_menu.campaigns"), back_office_campaigns_path, class: "navbar-link #{'active' if controller_name == "campaigns"}" %></li>
+                <li class="navbar-item"><%= link_to t("main_menu.bundles"), back_office_bundles_path, class: "navbar-link #{'active' if controller_name == "bundles"}" %></li>
+                <li class="navbar-item"><%= link_to t("main_menu.users"), back_office_users_path, class: "navbar-link #{'active' if controller_name == "users"}" %></li>
                 <li class="navbar-item" style="float: right;" data-controller="popover">
-                    <%= link_to current_user.default_name, "#", class: "navbar-link ", style: "margin-right: 0;",
+                    <%= link_to current_user.default_name, "#",
+                                class: "navbar-link",
+                                style: "margin-right: 0;",
                                 data: { action: "click->popover#toggle", test_id: "navbar-link-current-user" } %>
                     <div class="popover" data-popover-target="popoverContainer">
                         <ul class="popover-list">
-                            <li class="popover-item"><%= link_to t("main_menu.account_settings"), "#", class: "popover-link" %></li>
                             <li class="popover-item"><%= link_to t("main_menu.account_logout"), "/logout", class: "popover-link" %></li>
                         </ul>
                     </div>
