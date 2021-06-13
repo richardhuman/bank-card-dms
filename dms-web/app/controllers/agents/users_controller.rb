@@ -16,7 +16,6 @@ class Agents::UsersController < Agents::BaseController
     @user.attributes = user_params
     if @user.valid?
       handle_create_new_user(@user)
-      # redirect_to url_for(action: :edit, id: @user), notice: I18n.t("forms.user.notices.create")
       redirect_to agents_users_path, notice: I18n.t("forms.user.notices.create")
     else
       render :new, status: :unprocessable_entity

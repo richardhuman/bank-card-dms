@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   validate :at_least_one_identifier
   # TODO: The email presence conflicts with the rule above, but we will be able
-  # to remove it once once we can send invites to mobile numbers via SMS.
+  # TODO: to remove it once once we can send invites to mobile numbers via SMS.
   validates :email, presence: true, uniqueness: true
   validates :mobile_number, uniqueness: true
   validates :manager, presence: true, if: proc { self.sales_agent_role? }

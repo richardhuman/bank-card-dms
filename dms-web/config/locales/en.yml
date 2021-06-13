@@ -47,6 +47,9 @@ en:
       errors:
         failed: The user could not be found by either email or mobile number or the password was incorrect.
         unactivated: The user has not been activated yet. They need to accept their invitation.
+    access:
+      errors:
+        denied: You do not have access to this section.
 
   user_invitations:
     actions:
@@ -125,7 +128,6 @@ en:
         quantity: Quantity
         sale_quantity: Sale quantity
         transfer_quantity: Transfer quantity
-
 
   forms:
     shared:

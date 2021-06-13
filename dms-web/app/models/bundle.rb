@@ -49,7 +49,7 @@ class Bundle < ApplicationRecord
   end
 
   def actionable?
-    self.id.nil? || status.in?(["empty", "loaded", "released"])
+    self.id.nil? || status.in?(%w[empty loaded released])
   end
 
   private
