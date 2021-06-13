@@ -4,6 +4,7 @@ class Bundle < ApplicationRecord
   include CurrentUser
 
   belongs_to :loaded_by, class_name: "User"
+  belongs_to :campaign
   belongs_to :parent_bundle, class_name: "Bundle", optional: true, inverse_of: "child_bundles"
   belongs_to :current_assignee, class_name: "User", optional: true, inverse_of: "bundles"
   belongs_to :deleted_by, class_name: "User", optional: true
@@ -19,6 +20,7 @@ class Bundle < ApplicationRecord
   scope :active, -> () { where(deleted_at: nil) }
   scope :assigned_to, -> (user) { where(current_assignee: user) }
   scope :chronologically, -> () { order(created_at: :asc) }
+  scope :available_as_parent, -> () { loaded_status.or(released_status) }
 
   after_initialize :track_loaded_user
   before_create :track_loaded

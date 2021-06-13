@@ -4,6 +4,9 @@ class UserSessionsController < ApplicationController
   before_action :authenticate, only: []
 
   def new
+    puts "========="
+    puts flash.keys
+    puts flash["alert"]
     @user_session = UserSession.new
   end
 

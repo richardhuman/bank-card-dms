@@ -5,6 +5,9 @@
         <div>
             <%= t("activerecord.attributes.bundle.current_quantity") %>: <%= @bundle.current_quantity %>
         </div>
+        <div>
+            <%= t("activerecord.attributes.bundle.campaign") %>: <%= @bundle.campaign.title %>
+        </div>
     </div>
 
     <% disabled = @bundle_sale_action.nil? %>

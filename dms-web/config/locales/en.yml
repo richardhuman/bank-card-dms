@@ -75,6 +75,7 @@ en:
         title: Title
         description: Description
         created_by: Created by
+        status: Status
       bundle:
         bundle_number: Bundle number
         status: Status
@@ -85,8 +86,7 @@ en:
         parent_bundle: Parent bundle
         released: Released to agent
         released_at: Released at
-        transferee: Transferee
-        transfer_quantity: Transfer quantity
+        campaign: Campaign
       bundle_transaction:
         logged_by: Logged by
         executed_by: Executed by

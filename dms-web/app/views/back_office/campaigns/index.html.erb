@@ -7,7 +7,7 @@
             <thead>
             <tr>
                 <th><%= t("activerecord.attributes.campaign.title") %></th>
-                <th><%= t("activerecord.attributes.campaign.description") %></th>
+                <th><%= t("activerecord.attributes.campaign.status") %></th>
                 <th><%= t("activerecord.attributes.campaign.created_by") %></th>
                 <th><%= t("activerecord.attributes.shared.created_at") %></th>
                 <th></th>
@@ -17,8 +17,17 @@
             <tbody>
             <% @campaigns.each do |campaign| %>
                 <tr>
-                    <td><%= campaign.title %></td>
-                    <td><%= campaign.description %></td>
+                    <td data-controller="popover">
+                        <%= link_to campaign.title, "#", data: { action: "click->popover#toggle" } %>
+                        <div class="popover" data-popover-target="popoverContainer">
+                            <span class="popover-text">
+                                <%= t("activerecord.attributes.campaign.description") %>:<br/>
+                                <%= campaign.description_htmlize.html_safe %>
+                            </span>
+                        </div>
+                    </td>
+
+                    <td><%= campaign.status.capitalize %></td>
                     <td><%= campaign.created_by.default_name %></td>
                     <td><%= campaign.created_at.to_formatted_s(:timestamp) %></td>
                     <td><%= link_to t("forms.campaign.actions.edit"), edit_back_office_campaign_path(campaign), data: { turbo_frame: "_top" }  %></td>

@@ -12,6 +12,11 @@
         <%= form.text_area :description, rows: 5, class: "u-full-width", placeholder: t("activerecord.attributes.campaign.description") %>
     </div>
 
+    <div>
+        <%= form.label :status %>
+        <%= form.select :status, Campaign.statuses %>
+    </div>
+
     <div class="form-actions">
         <%= link_to t("forms.shared.actions.cancel"), back_office_campaigns_path,
                     class: "button",

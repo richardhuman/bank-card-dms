@@ -43,11 +43,13 @@ class BackOffice::BundlesController < BackOffice::BaseController
     end
 
     def bundle_params
-      params.require(:bundle).permit(:bundle_number, :current_quantity, :current_assignee_id, :parent_bundle_id, :released)
+      params.require(:bundle).permit(:campaign_id, :bundle_number, :current_quantity, :current_assignee_id,
+                                     :parent_bundle_id, :released)
     end
 
     def set_lookups
-      @available_parent_bundles = Bundle.empty_status.chronologically
+      @open_campaigns = Campaign.open_status
+      @available_parent_bundles = Bundle.available_as_parent.chronologically
       @agents = User.active.sales_agent_role.order_name
     end
 end

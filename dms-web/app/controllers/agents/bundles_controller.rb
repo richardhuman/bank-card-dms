@@ -44,6 +44,6 @@ class Agents::BundlesController < Agents::BaseController
     end
 
     def set_lookups
-      @sub_agents = current_user.sub_agents.active.sales_agent_role.order_name
+      @sub_agents = current_user.managed_users.active.sales_agent_role.order_name
     end
 end

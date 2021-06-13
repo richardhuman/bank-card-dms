@@ -3,6 +3,12 @@
     <%= render "/shared/form_errors", active_model_object: bundle %>
 
     <div>
+        <%= form.label :campaign %>
+        <%= form.collection_select :campaign_id, @open_campaigns, :id, :title, { include_blank: true }  %>
+    </div>
+
+
+    <div>
         <%= form.label :bundle_number %>
         <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.bundle.bundle_number") %> &nbsp; <%= bundle.status.humanize unless bundle.id.nil? %>
     </div>

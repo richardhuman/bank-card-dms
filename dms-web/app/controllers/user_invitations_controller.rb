@@ -7,7 +7,7 @@ class UserInvitationsController < ApplicationController
     invite = UserInvitation.find_by(invitation_code: params[:invitation_code])
 
     if invite.nil?
-      redirect_to new_user_session_path, alert: t("user_invitations.errors.expired"), status: 302
+      redirect_to new_user_session_path, alert: t("user_invitations.errors.expired")
       return
     end
     redirect_to new_user_session_path, alert: t("user_invitations.errors.expired") if invite.expired?
