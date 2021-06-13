@@ -1,8 +1,15 @@
 require "test_helper"
 
 class BackOffice::BundlesControllerTest < ActionDispatch::IntegrationTest
+
+  def setup
+    super
+    @username = "0820000001"
+    @user = User.find_by(mobile_number: @username)
+  end
+
   test "should get index" do
-    get back_office_bundles_index_url
+    get back_office_bundles_path
     assert_response :success
   end
 

@@ -1,0 +1,9 @@
+<%= render layout: "layouts/turbo_sub_layout" do %>
+
+    <div class="content-section">
+        <h6 class="content-header"><%= t("forms.user.actions.edit") %></h6>
+        <%= render "form", user: @user, include_password_fields: true %>
+    </div>
+
+<% end %>
+

@@ -1,6 +1,8 @@
-<div class="content-section">
-    <div class="one-half column">
-        <h6 class="content-header"><%= t("user_logins.header") %></h6>
-        <%= render "form", user_session: @user_session %>
+<%= render layout: "layouts/turbo_sub_layout" do %>
+    <div class="content-section">
+        <div class="one-half column">
+            <h6 class="content-header"><%= t("user_sessions.header") %></h6>
+            <%= render "form", user_session: @user_session %>
+        </div>
     </div>
-</div>
+<% end %>

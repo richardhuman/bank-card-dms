@@ -5,7 +5,7 @@ class Bundle < ApplicationRecord
 
   belongs_to :loaded_by, class_name: "User"
   belongs_to :parent_bundle, class_name: "Bundle", optional: true, inverse_of: "child_bundles"
-  belongs_to :current_assignee, class_name: "User", optional: true
+  belongs_to :current_assignee, class_name: "User", optional: true, inverse_of: "bundles"
   belongs_to :deleted_by, class_name: "User", optional: true
 
   has_many :child_bundles, class_name: "Bundle", foreign_key: :parent_bundle_id

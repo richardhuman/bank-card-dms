@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_204609) do
+ActiveRecord::Schema.define(version: 2021_06_12_153934) do
 
   create_table "barcode_symbologies", charset: "utf8", force: :cascade do |t|
     t.string "code", null: false
@@ -79,17 +79,27 @@ ActiveRecord::Schema.define(version: 2021_06_09_204609) do
     t.index ["card_number"], name: "index_cards_on_card_number", unique: true
   end
 
+  create_table "user_invitations", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "invitation_code", null: false
+    t.timestamp "expires_at", default: -> { "current_timestamp()" }, null: false
+    t.timestamp "claimed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_invitations_on_user_id"
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "email"
     t.string "mobile_number"
     t.string "password_digest", null: false
     t.string "first_name"
     t.string "surname"
-    t.timestamp "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "manager_id"
     t.integer "user_role", null: false
+    t.timestamp "activated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["manager_id"], name: "index_users_on_manager_id"
     t.index ["mobile_number"], name: "index_users_on_mobile_number", unique: true
@@ -105,5 +115,6 @@ ActiveRecord::Schema.define(version: 2021_06_09_204609) do
   add_foreign_key "bundles", "users", column: "loaded_by_id"
   add_foreign_key "campaigns", "users", column: "created_by_id"
   add_foreign_key "cards", "bundles"
+  add_foreign_key "user_invitations", "users"
   add_foreign_key "users", "users", column: "manager_id"
 end

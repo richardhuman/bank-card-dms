@@ -9,7 +9,7 @@
 
     <div>
         <%= form.label :current_quantity %>
-        <%= form.text_field :current_quantity, placeholder: t("activerecord.attributes.bundle.current_quantity") %> &nbsp;/&nbsp; <%= bundle.initial_quantity unless bundle.id.nil? %>
+        <%= form.text_field :current_quantity, placeholder: t("activerecord.attributes.bundle.current_quantity") %>  <%= raw("&nbsp;/&nbsp;#{bundle.initial_quantity}") unless bundle.id.nil? %>
     </div>
 
     <div>

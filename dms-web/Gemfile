@@ -33,7 +33,8 @@ group :development do
   gem "rack-mini-profiler", "~> 2.0"
   gem "listen", "~> 3.3"
   gem "spring"
-  gem 'brakeman'
+  gem "brakeman"
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :rubocop do

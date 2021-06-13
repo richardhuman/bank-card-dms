@@ -1,0 +1,36 @@
+<%= render layout: "layouts/turbo_sub_layout" do %>
+
+    <div class="content-section">
+        <h6 class="content-header"><%= t("main_menu.users") %></h6>
+
+        <table class="u-full-width">
+            <thead>
+            <tr>
+                <th><%= t("activerecord.attributes.user.name") %></th>
+                <th><%= t("activerecord.attributes.user.contact") %></th>
+                <th><%= t("activerecord.attributes.shared.created_at") %></th>
+                <th><%= t("activerecord.attributes.user.activated_at") %></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @my_users.each do |user| %>
+                <tr>
+                    <td><%= user.full_name %></td>
+                    <td><%= user.mobile_number %>
+                        <br/>
+                        <%= user.email %>
+                    </td>
+                    <td><%= user.created_at.to_formatted_s(:standard) %></td>
+                    <td><%= user.activated_at&.to_formatted_s(:standard) %></td>
+                    <td><%= link_to t("forms.user.actions.edit"), edit_agents_user_path(user) %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+
+    <%= link_to t("forms.user.actions.create"), new_agents_user_path, class: "button button-primary" %>
+
+<% end %>

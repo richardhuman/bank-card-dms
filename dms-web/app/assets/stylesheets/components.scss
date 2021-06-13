@@ -8,18 +8,25 @@
     position: relative;
 }
 
-.notice {
+.flash {
     box-sizing: border-box;
     position: absolute;
     top: 0;
     right: 0;
-    max-width: 40%;
-    background-color: $colour_success;
+    max-width: 60%;
     color: white;
     padding: 2rem;
     margin-top: 1rem;
     border-radius: 4px;
     opacity: 0.95;
+}
+
+.notice {
+    background-color: $colour_success;
+}
+
+.alert {
+    background-color: $colour_error;
 }
 
 // ============================================================================

@@ -1,0 +1,11 @@
+
+<h1>Verify email</h1>
+<p>
+    [Placeholder]
+</p>
+
+<p>
+    Please click the following link to verify your email and activate your account:
+    <%= url = url_for(controller: :user_invitations, action: :claim, invitation_code: @user_invitation.invitation_code, data: { turbo: false })  %>
+    <%= link_to url, url  %>
+</p>

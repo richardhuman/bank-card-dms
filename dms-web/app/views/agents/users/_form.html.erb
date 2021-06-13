@@ -1,0 +1,57 @@
+<% include_password_fields = false if local_assigns[:include_password_fields].nil? %>
+
+<%= form_with(model: [:agents, user]) do |form| %>
+
+    <%= render "/shared/form_errors", active_model_object: user %>
+
+    <div>
+        <%= form.label :first_name %>
+        <%= form.text_field :first_name, class: "u-full-width", placeholder: t("activerecord.attributes.user.first_name") %>
+    </div>
+
+    <div>
+        <%= form.label :surname %>
+        <%= form.text_field :surname, class: "u-full-width", placeholder: t("activerecord.attributes.user.surname") %>
+    </div>
+
+    <div>
+        <%= form.label :mobile_number %>
+        <%= form.text_field :mobile_number, class: "u-full-width", placeholder: t("activerecord.attributes.user.mobile_number") %>
+    </div>
+
+    <div>
+        <%= form.label :email %>
+        <%= form.text_field :email, class: "u-full-width", placeholder: t("activerecord.attributes.user.email") %>
+    </div>
+
+    <% if include_password_fields %>
+        <div>
+            <%= form.label :password %>
+            <%= form.password_field :password, class: "u-full-width", placeholder: t("activerecord.attributes.user.password") %>
+        </div>
+
+        <div>
+            <%= form.label :password_confirmation %>
+            <%= form.password_field :password_confirmation, class: "u-full-width", placeholder: t("activerecord.attributes.user.password_confirmation") %>
+        </div>
+    <% end %>
+
+    <div class="form-actions">
+        <%= link_to t("forms.shared.actions.cancel"), agents_users_path,
+                    class: "button",
+                    data: { confirm: t("forms.shared.actions.confirm_cancel") }%>
+        <%= form.submit user.id ?
+                                t("forms.user.actions.update") :
+                                t("forms.user.actions.create"),
+                        { class: "button-primary" } %>
+    </div>
+
+    <% if user.id %>
+        <div class="form-actions danger">
+            <%= link_to t("forms.user.actions.delete"), [:agents, user], method: :delete,
+                        data: { confirm: t("forms.user.actions.delete")}, class: "button button-danger"  %>
+        </div>
+    <% end %>
+
+
+<% end %>

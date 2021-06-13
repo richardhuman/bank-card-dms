@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :user_sessions, only: [:new, :create, :delete]
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
+  resources :user_sessions, only: [:new, :create, :destroy]
 
   namespace :back_office do
     resources :campaigns, except: [:show]
@@ -11,9 +13,12 @@ Rails.application.routes.draw do
 
   namespace :agents do
     resources :bundles, except: [:show]
+    resources :users, except: [:show]
   end
 
-  get "/logout" => "user_sessions#delete"
+  get "user_invitations/claim/:invitation_code" => "user_invitations#claim"
+
+  get "/logout" => "user_sessions#destroy"
   get "/login" => "user_sessions#new"
 
   root to: "user_sessions#new"

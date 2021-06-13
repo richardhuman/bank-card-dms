@@ -40,26 +40,37 @@ en:
     account_settings: Settings
     account_logout: Logout
 
-  user_logins:
+  user_sessions:
     header: Login
-    form:
-      username_placeholder: Mobile number or email
-      password_placeholder: Password
-      submit: Login
+    authentication:
+      errors:
+        failed: The user could not be found by either email or mobile number or the password was incorrect.
+        unactivated: The user has not been activated yet. They need to accept their invitation.
+  user_invitations:
+    actions:
+      claimed: Your account has been activated. Please change your password.
+    errors:
+      claimed: This invitation has already been claimed by %{username}.
+      expired: This inviation has been expired. Ask your manager to send you a new invitation.
 
-  errors:
-    login:
-      failed: The user could not be found by either email or mobile number or the password was incorrect.
-      not_active: The user is no longer active.
+  agent_bundles:
+    my_bundle:
+      header: My bundles
+    team_bundles:
+      header: My team's bundles
+
+
+
 
   activerecord:
     models:
       bundle: Bundle
       bundle_transaction: Transactions
-      bundle_action:
+      bundle_action: Action
+      user_session: Session
     attributes:
       shared:
-        created_at: Created at
+        created_at: Created
       campaign:
         title: Title
         description: Description
@@ -92,10 +103,9 @@ en:
         surname: Surname
         manager: Manager
         user_role: Role
-      bundle_action:
-        quantity: Quantity
-        sale_quantity: Sale quantity
-        transfer_quantity: Transfer quantity
+        password: Password
+        password_confirmation: Confirm password
+        activated_at: Activated
     errors:
       models:
         bundle:
@@ -109,6 +119,13 @@ en:
         bundle_action:
           invalid_sale_quantity: cannot be more than the current quantity in the bundle.
     attributes:
+      user_session:
+        username: Username
+        password: Password
+      bundle_action:
+        quantity: Quantity
+        sale_quantity: Sale quantity
+        transfer_quantity: Transfer quantity
 
 
   forms:
@@ -117,6 +134,12 @@ en:
         cancel: Cancel
         confirm_cancel: Are you sure you wish to cancel editing and revert all changes?
         confirm_delete: Are you sure you wish to delete this item? This cannot be undone.
+    user_session:
+      placeholder:
+        username: Mobile number or email
+        password: Password
+      actions:
+        submit: Login
     bundle:
       actions:
         create: Add bundle
@@ -152,17 +175,13 @@ en:
         create: The user was successfully created.
         update: The user was successfully updated.
         delete: The user was successfully deleted.
+        unable_to_delete: The user cannot be deleted at this stage as they have bundles assigned to them.
     bundle_action:
       notices:
         sale: "The sale of %{quantity} units was successfully recorded."
         transfer: "The transfer of %{quantity} units, transferred to %{name}, was successfully recorded."
 
 
-  agent_bundles:
-    my_bundle:
-      header: My bundles
-    team_bundles:
-      header: My team's bundles
 
 
 

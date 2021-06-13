@@ -12,14 +12,19 @@
 back_office = User.where(email: "backoffice@company.com", mobile_number: "0820000001").
   first_or_create!(first_name: "Richard", surname: "BackOffice",
                    password: "password", password_confirmation: "password",
-                   user_role: :back_office)
+                   user_role: :back_office, activated_at: Time.new)
 
-jimmy = User.where(email: "sales_agent@company.com", mobile_number: "0820000002").
+jimmy = User.where(email: "jimmy@company.com", mobile_number: "0820000002").
   first_or_create!(first_name: "Jimmy", surname: "SalesAgent",
                    password: "password", password_confirmation: "password",
-                   user_role: :sales_agent, manager: back_office)
+                   user_role: :sales_agent, manager: back_office, activated_at: Time.new)
 
-User.where(email: "sales_agent2@company.com", mobile_number: "0820000003").
+robert = User.where(email: "robert@company.com", mobile_number: "0820000003").
+  first_or_create!(first_name: "Robert", surname: "SalesAgent",
+                   password: "password", password_confirmation: "password",
+                   user_role: :sales_agent, manager: back_office, activated_at: Time.new)
+
+User.where(email: "sally@company.com", mobile_number: "0820000004").
   first_or_create!(first_name: "Sally", surname: "SalesAgent",
                    password: "password", password_confirmation: "password",
-                   user_role: :sales_agent, manager: jimmy)
+                   user_role: :sales_agent, manager: jimmy, activated_at: Time.new)

@@ -14,17 +14,17 @@ class UserSession
     end
 
     if login.nil?
-      errors.add(:base, I18n.t("errors.login.failed"))
+      errors.add(:base, I18n.t("user_sessions.authentication.errors.failed"))
       return nil
     end
 
-    unless login.active?
-      errors.add(:base, I18n.t("errors.login.not_active"))
+    unless login.activated?
+      errors.add(:base, I18n.t("user_sessions.authentication.errors.unactivated"))
       return nil
     end
 
     unless login.authenticate(self.password)
-      errors.add(:base, I18n.t("errors.login.failed"))
+      errors.add(:base, I18n.t("user_sessions.authentication.errors.failed"))
       return nil
     end
 

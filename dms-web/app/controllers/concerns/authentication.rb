@@ -12,16 +12,21 @@ module Authentication
   private
     def authenticate
       authenticated_user = User.find_by(id: cookies.encrypted[SESSION_USER_KEY])
-      if authenticated_user
+
+      unless authenticated_user
+        store_unauthenticated_location
+        redirect_to new_user_session_path
+        return
+      end
+
+      if authenticated_user.activated?
         CurrentRequest.user_id = authenticated_user.id
       else
-        store_unauthenticated_location
-        redirect_to new_user_session_url
+        redirect_to new_user_session_path, alert: t("user_sessions.authentication.errors.unactivated")
       end
     end
 
     def create_session(user)
-      # CurrentRequest.user = user
       cookies.encrypted[SESSION_USER_KEY] = user.id
     end
 

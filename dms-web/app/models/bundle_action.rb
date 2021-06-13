@@ -30,7 +30,7 @@ class BundleAction
     elsif transfer_action?
       handle_transfer!
     else
-      raise NotImplementedError("Unknown Bunlde action: #{action}")
+      raise ApplicationError.new(message: "Unknown bundle action: #{action} for bundle #{bundle.id}", user: current_user)
     end
   end
 

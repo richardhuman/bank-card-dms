@@ -1,0 +1,4 @@
+development:
+  application_name: DMS
+  base_application_url: "http://localhost:3000"
+  email_default_from: no-reply@dms.com

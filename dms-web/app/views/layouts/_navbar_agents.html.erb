@@ -4,6 +4,7 @@
             <li class="navbar-item navbar-link"><%= t("main_menu.home") %></li>
             <% if current_user %>
                 <li class="navbar-item"><%= link_to t("main_menu.bundles"), agents_bundles_path, class: "navbar-link" %></li>
+                <li class="navbar-item"><%= link_to t("main_menu.users"), agents_users_path, class: "navbar-link" %></li>
                 <li class="navbar-item" style="float: right;" data-controller="popover">
                     <%= link_to current_user.default_name, "#", class: "navbar-link ", style: "margin-right: 0;",
                                 data: { action: "click->popover#toggle" } %>

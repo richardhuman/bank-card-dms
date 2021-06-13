@@ -23,9 +23,9 @@ class UserSessionsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     delete_session
-    redirect_to "/login"
+    redirect_to new_user_session_path
   end
 
   private
@@ -50,7 +50,7 @@ class UserSessionsController < ApplicationController
     end
 
     def get_home_path_for_user(user)
-      if user.back_office_role? || user.super_user_role?
+      if user.back_office_role?
         back_office_bundles_path
       else
         agents_bundles_path
