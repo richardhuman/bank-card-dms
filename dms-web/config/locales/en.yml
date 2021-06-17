@@ -150,12 +150,15 @@ en:
         capture_sale: Capture sale
         transfer: Transfer
       confirmations:
-        transfer: "Are you sure you wish to transfer these units from this bundle? This action will create a new bundle."
+        transfer: "Are you sure you wish to transfer the entire bundle to the other agent?"
+        split_transfer: "Are you sure you wish to transfer these units from this bundle?"
       notices:
         create: The bundle was successfully created.
         update: The bundle was successfully updated.
         delete: The bundle was successfully deleted.
+      alerts:
         actionable: This bundle is no longer actionable.
+        delete: The bundle cannot be deleted at this stage as transctions have already been executed against it.
     campaign:
       actions:
         create: Add campaign
@@ -173,14 +176,16 @@ en:
         edit: Edit
         delete: Delete user
       notices:
-        create: The user was successfully created.
+        create: The user was successfully created and an verification message has been sent.
         update: The user was successfully updated.
         delete: The user was successfully deleted.
-        unable_to_delete: The user cannot be deleted at this stage as they have bundles assigned to them.
+      alerts:
+        delete: The user cannot be deleted at this stage as they have bundles assigned to them.
     bundle_action:
       notices:
         sale: "The sale of %{quantity} units was successfully recorded."
-        transfer: "The transfer of %{quantity} units, transferred to %{name}, was successfully recorded."
+        transfer: "The transfer of the entire bundle %{bundle_number} to %{name} was successfully recorded."
+        split_transfer: "The transfer of %{quantity} units from bundle %{bundle_number}, transferred to %{name}, was successfully recorded."
 
   stats:
     campaign:

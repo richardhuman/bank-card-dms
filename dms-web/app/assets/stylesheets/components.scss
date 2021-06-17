@@ -10,9 +10,9 @@
 
 .flash {
     box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: fixed;
+    bottom: 5rem;
+    right: 5rem;
     max-width: 60%;
     color: white;
     padding: 2rem;

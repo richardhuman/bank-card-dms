@@ -45,7 +45,7 @@
                         { class: "button-primary" } %>
     </div>
 
-    <% if bundle.id %>
+    <% if bundle.id && bundle.can_be_destroyed? %>
         <div class="form-actions danger">
             <%= link_to t("forms.bundle.actions.delete"), [:back_office, bundle], method: :delete,
                         data: { confirm: t("forms.shared.actions.confirm_delete")}, class: "button button-danger"  %>

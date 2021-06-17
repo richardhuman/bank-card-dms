@@ -41,7 +41,11 @@ class User < ApplicationRecord
   end
 
   def can_be_destroyed?
-    self.bundles.empty?
+    self.bundles.empty? && current_user.is_a_manager?
+  end
+
+  def is_a_manager?
+    self.managed_users.count > 0
   end
 
   def full_name_with_identifier

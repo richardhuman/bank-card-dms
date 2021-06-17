@@ -7,7 +7,6 @@ class Bundle < ApplicationRecord
   belongs_to :campaign
   belongs_to :parent_bundle, class_name: "Bundle", optional: true, inverse_of: "child_bundles"
   belongs_to :current_assignee, class_name: "User", optional: true, inverse_of: "bundles"
-  belongs_to :deleted_by, class_name: "User", optional: true
 
   has_many :child_bundles, class_name: "Bundle", foreign_key: :parent_bundle_id
   has_many :transactions, -> { order(created_at: :desc) }, class_name: "BundleTransaction"
@@ -17,7 +16,7 @@ class Bundle < ApplicationRecord
   validates :current_quantity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validate :only_changes_on_actionable?
 
-  scope :active, -> () { where(deleted_at: nil) }
+  scope :active, -> () { all }
   scope :assigned_to, -> (user) { where(current_assignee: user) }
   scope :chronologically, -> () { order(created_at: :asc) }
   scope :available_as_parent, -> () { loaded_status.or(released_status) }
@@ -42,10 +41,8 @@ class Bundle < ApplicationRecord
     split_transfer: 10
   }, _prefix: "creation_mode"
 
-  def handle_delete!
-    self.deleted_at = Time.new
-    self.deleted_by = current_user
-    save!
+  def can_be_destroyed?
+    empty_status? && child_bundles.empty? && transactions.empty?
   end
 
   def actionable?

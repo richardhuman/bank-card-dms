@@ -46,7 +46,7 @@
                         { class: "button-primary" } %>
     </div>
 
-    <% if user.id %>
+    <% if user.id && user.can_be_destroyed? %>
         <div class="form-actions danger">
             <%= link_to t("forms.user.actions.delete"), [:agents, user], method: :delete,
                         data: { confirm: t("forms.user.actions.delete")}, class: "button button-danger"  %>

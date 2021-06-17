@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_13_192127) do
+ActiveRecord::Schema.define(version: 2021_06_17_153623) do
 
   create_table "barcode_symbologies", charset: "utf8", force: :cascade do |t|
     t.string "code", null: false
@@ -48,8 +48,6 @@ ActiveRecord::Schema.define(version: 2021_06_13_192127) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "parent_bundle_id"
-    t.timestamp "deleted_at"
-    t.bigint "deleted_by_id"
     t.timestamp "released_at"
     t.boolean "released", default: false, null: false
     t.bigint "campaign_id", null: false
@@ -57,7 +55,6 @@ ActiveRecord::Schema.define(version: 2021_06_13_192127) do
     t.index ["bundle_number"], name: "index_bundles_on_bundle_number", unique: true
     t.index ["campaign_id"], name: "index_bundles_on_campaign_id"
     t.index ["current_assignee_id"], name: "index_bundles_on_current_assignee_id"
-    t.index ["deleted_by_id"], name: "index_bundles_on_deleted_by_id"
     t.index ["loaded_by_id"], name: "index_bundles_on_loaded_by_id"
     t.index ["parent_bundle_id"], name: "index_bundles_on_parent_bundle_id"
   end
@@ -116,7 +113,6 @@ ActiveRecord::Schema.define(version: 2021_06_13_192127) do
   add_foreign_key "bundles", "bundles", column: "parent_bundle_id"
   add_foreign_key "bundles", "campaigns"
   add_foreign_key "bundles", "users", column: "current_assignee_id"
-  add_foreign_key "bundles", "users", column: "deleted_by_id"
   add_foreign_key "bundles", "users", column: "loaded_by_id"
   add_foreign_key "campaigns", "users", column: "created_by_id"
   add_foreign_key "cards", "bundles"

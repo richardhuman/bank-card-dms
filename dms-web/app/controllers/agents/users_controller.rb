@@ -38,13 +38,17 @@ class Agents::UsersController < Agents::BaseController
       @user.destroy
       redirect_to agents_users_path, notice: I18n.t("forms.user.notices.delete")
     else
-      redirect_to agents_users_path, alert: I18n.t("forms.user.notices.unable_to_delete")
+      redirect_to agents_users_path, alert: I18n.t("forms.user.alerts.delete")
     end
   end
 
   private
     def set_user
-      @user = User.managed_by(current_user).find(params[:id])
+      if current_user.id == params[:id].to_i
+        @user = User.find(params[:id])
+      else
+        @user = User.managed_by(current_user).find(params[:id])
+      end
     end
 
     def user_params
@@ -54,6 +58,7 @@ class Agents::UsersController < Agents::BaseController
     def handle_create_new_user(user)
       invite = nil
       ApplicationRecord.transaction do
+        user.manager = current_user
         user.save!
         invite = UserInvitation.create_invitation(user)
       end
