@@ -3,39 +3,34 @@
 require "application_system_test_case"
 
 class CreateAndReleaseBundlesTest < ApplicationSystemTestCase
-  # include ::LoginHelper
-
   def setup
-    @username = "0820000001"
     @password = "password"
-    @user = User.find_by(mobile_number: @username)
+    @back_office_user = users(:back_office_user)
+    @agent_agent = users(:sales_agent_1_1)
+    @campaign = campaigns(:campaign_launch)
   end
 
   def teardown
     # take_failed_screenshot
-    take_screenshot
+    # take_screenshot
   end
 
-  def test_create_bundle
-    login(@user.mobile_number, @password)
-    find("a[data-test-id='navbar-link-current-user']", visible: true)
-    # assert_equal @user.first_name.upcase, f.value
+  test "create bundle" do
+    login(@back_office_user.mobile_number, @password)
+    find(".navbar a[data-test-id='back-office-navbar-bundles']").click
+    find("#turbo-main-content-frame a[data-test-id='back-office-bundles-add']").click
+
+
+    # TODO: Capybara not finding the injected turbo-frame
+    find("#turbo-main-content-frame select[data-test-id='bundle-edit-bundle-number']").fill_in with: "100.1"
+    find("#turbo-main-content-frame select[data-test-id='bundle-edit-current-quantity']").fill_in with: "100"
+    find("#turbo-main-content-frame select[data-test-id='bundle-edit-current-assignee']").select @agent_agent.full_name_with_identifier
+    find("#turbo-main-content-frame select[data-test-id='bundle-edit-campaign']").select @campaign.id.to_s
+    find("#turbo-main-content-frame select[data-test-id='bundle-released']").check
+    find("#turbo-main-content-frame select[data-test-id='bundle-edit-submit']").click
+
+    expect(find("#notice")).to have_content("The bundle was successfully created.")
+
+    all("#turbo-main-content-frame #card-bundle-transactions table tbody tr").length
   end
-
-
-  def login(username, password)
-    visit root_url
-    # check_at_login_page
-    find("input[data-test-id='login-username']", visible: true).fill_in with: username
-    find("input[data-test-id='login-password']", visible: true).fill_in with: password
-    find("input[data-test-id='login-submit']").click
-  end
-
-  # private
-  #   def check_at_login_page
-  #     assert_text "DMS"
-  #     assert find("input[data-test-id='login-username']", visible: true)
-  #     assert find("input[data-test-id='login-password']", visible: true)
-  #     assert find("input[data-test-id='login-submit']")
-  #   end
 end

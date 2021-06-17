@@ -4,24 +4,28 @@
 
     <div>
         <%= form.label :campaign %>
-        <%= form.collection_select :campaign_id, @open_campaigns, :id, :title, { include_blank: true }  %>
+        <%= form.collection_select :campaign_id, @open_campaigns, :id, :title, { include_blank: true }, data: { test_id: "bundle-edit-campaign" }  %>
     </div>
 
 
     <div>
         <%= form.label :bundle_number %>
-        <%= form.text_field :bundle_number, placeholder: t("activerecord.attributes.bundle.bundle_number") %> &nbsp; <%= bundle.status.humanize unless bundle.id.nil? %>
+        <%= form.text_field :bundle_number,
+                            placeholder: t("activerecord.attributes.bundle.bundle_number"),
+                            data: { test_id: "bundle-edit-bundle-number" } %> &nbsp; <%= bundle.status.humanize unless bundle.id.nil? %>
     </div>
 
     <div>
         <%= form.label :current_quantity %>
-        <%= form.text_field :current_quantity, placeholder: t("activerecord.attributes.bundle.current_quantity") %>  <%= raw("&nbsp;/&nbsp;#{bundle.initial_quantity}") unless bundle.id.nil? %>
+        <%= form.text_field :current_quantity,
+                            placeholder: t("activerecord.attributes.bundle.current_quantity"),
+                            data: { test_id: "bundle-edit-current-quantity" } %>  <%= raw("&nbsp;/&nbsp;#{bundle.initial_quantity}") unless bundle.id.nil? %>
     </div>
 
     <div>
         <%= form.label :current_assignee %>
         <%= form.collection_select :current_assignee_id, @agents, :id, :full_name_with_identifier,
-                                   { include_blank: true  } %>
+                                   { include_blank: true  }, data: { test_id: "bundle-edit-current-assignee" }  %>
     </div>
 
     <div>
@@ -32,7 +36,7 @@
 
     <div>
         <%= form.label :released %>
-        <%= form.check_box :released %>
+        <%= form.check_box :released, data: { test_id: "bundle-edit-released" }  %>
     </div>
 
     <div class="form-actions">
@@ -42,7 +46,8 @@
         <%= form.submit bundle.id ?
                                 t("forms.bundle.actions.update") :
                                 t("forms.bundle.actions.create"),
-                        { class: "button-primary" } %>
+                        class: "button-primary",
+                        data: { test_id: "bundle-edit-submit" } %>
     </div>
 
     <% if bundle.id && bundle.can_be_destroyed? %>

@@ -1,6 +1,6 @@
 <%= render layout: "layouts/turbo_sub_layout" do %>
 
-    <div class="content-section">
+    <div class="content-section" data-test-id="back-office-bundles-index">
         <h6 class="content-header"><%= t("main_menu.bundles") %></h6>
 
         <table class="u-full-width">
@@ -34,6 +34,6 @@
         </table>
     </div>
 
-    <%= link_to t("forms.bundle.actions.create"), new_back_office_bundle_path, class: "button button-primary" %>
+    <%= link_to t("forms.bundle.actions.create"), new_back_office_bundle_path, class: "button button-primary", data: { test_id: "back-office-bundles-add"} %>
 
 <% end %>

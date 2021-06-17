@@ -2,6 +2,8 @@
 
 module ApplicationHelper
   def get_application_name
+    # TODO: Investigate why during system tests Rails.configuration.tenant is not available here.
+    return "Test DMS application name" if Rails.env.test?
     Rails.configuration.tenant["application_name"]
   end
 

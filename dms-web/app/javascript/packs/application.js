@@ -10,23 +10,9 @@ import { Turbo, cable } from "@hotwired/turbo-rails";
 import "controllers"; // Stimulus
 
 Turbo.setProgressBarDelay(100);
-Rails.start();
+Rails.start(); // TODO: still using UJS for data-disable-with etc. Replace with Stimulus
 
 // TODO: Unused for now
 // import * as ActiveStorage from "@rails/activestorage";
 // import "channels";
 // ActiveStorage.start();
-
-/*
-document.addEventListener('turbo:load', function () {
-  console.log('turbo load')
-})
-
-document.addEventListener('turbo:render', function () {
-  console.log('turbo render')
-})
-
-document.addEventListener('turbo:visit', function () {
-  console.log('turbo visit')
-})
-*/

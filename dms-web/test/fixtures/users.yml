@@ -7,6 +7,7 @@ back_office_user:
   first_name: Backoffice
   surname: User
   user_role: 10
+  activated_at: 2021-06-16 00:00:00
 
 sales_agent_1_1:
   email: agent.1@sales1.com
@@ -15,6 +16,8 @@ sales_agent_1_1:
   first_name: Sales 1 - Agent 2
   surname:
   user_role: 20
+  manager: back_office_user
+  activated_at: 2021-06-16 00:00:00
 
 sales_agent_1_2:
   email: agent.2@sales1.com
@@ -23,3 +26,5 @@ sales_agent_1_2:
   first_name: Sales 1 - Agent 2
   surname:
   user_role: 20
+  manager: back_office_user
+  activated_at: 2021-06-16 00:00:00
