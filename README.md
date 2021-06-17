@@ -106,7 +106,7 @@ business models in order to validate the general work flow and model design:
 * Create user accounts in order to build up a network.
 * Record a sale.
 * Transfer bundle to a sub-agent.
-* Simple transfer of a partial bundle to a sub-agent (implemented as a simply 
+* Simple transfer of a partial bundle to a sub-agent (implemented as simply 
   splitting a bundle and recording quantities).
 * Track bundle transactions.
   
