@@ -10,11 +10,13 @@ Rails.application.routes.draw do
     resources :bundles, except: [:show]
     resources :users, except: [:show]
     get "dashboard" => "dashboard#index"
+    root to: "dashboard#index"
   end
 
   namespace :agents do
     resources :bundles, except: [:show]
     resources :users, except: [:show]
+    root to: "bundles#index"
   end
 
   get "user_invitations/claim/:invitation_code" => "user_invitations#claim"

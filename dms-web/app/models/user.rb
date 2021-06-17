@@ -52,8 +52,10 @@ class User < ApplicationRecord
     "#{first_name} #{surname}"
   end
 
+  # The default_name refers to the "standard" way that a particular
+  # company may refer to people based on their formality.
   def default_name
-    first_name # or full_name
+    first_name
   end
 
   def identifier

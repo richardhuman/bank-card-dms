@@ -10,37 +10,37 @@
 
 # BarcodeSymbology.where(code: BarcodeSymbology::EAN_13).first_or_create!(name: "EAN 13")
 
-back_office = User.where(email: "backoffice@company.com", mobile_number: "0820000001").
-  first_or_create!(first_name: "Richard", surname: "BackOffice",
+back_office = User.where(email: "maria@company.com", mobile_number: "0820000001").
+  first_or_create!(first_name: "Maria", surname: "Garcia",
                    password: "password", password_confirmation: "password",
                    user_role: :back_office, activated_at: Time.new)
 
-jimmy = User.where(email: "jimmy@company.com", mobile_number: "0820000002").
-  first_or_create!(first_name: "Jimmy", surname: "SalesAgent",
+helen = User.where(email: "helen@sales.com", mobile_number: "0720000002").
+  first_or_create!(first_name: "Helen", surname: "Smith",
                    password: "password", password_confirmation: "password",
                    user_role: :sales_agent, manager: back_office, activated_at: Time.new)
 
-robert = User.where(email: "robert@company.com", mobile_number: "0820000003").
-  first_or_create!(first_name: "Robert", surname: "SalesAgent",
+lisa = User.where(email: "lisa@sales.com", mobile_number: "0620000003").
+  first_or_create!(first_name: "Lisa", surname: "Johnson",
                    password: "password", password_confirmation: "password",
                    user_role: :sales_agent, manager: back_office, activated_at: Time.new)
 
-User.where(email: "sally@company.com", mobile_number: "0820000004").
-  first_or_create!(first_name: "Sally", surname: "SalesAgent",
+User.where(email: "sally@sales.com", mobile_number: "0720000004").
+  first_or_create!(first_name: "Sally", surname: "Brown",
                    password: "password", password_confirmation: "password",
-                   user_role: :sales_agent, manager: jimmy, activated_at: Time.new)
+                   user_role: :sales_agent, manager: helen, activated_at: Time.new)
 
-Campaign.create!(title: "New bank card launch - 2020",
-                 description: "Launch of new bank card product in Mar 2020 - 15000 cards",
-                 status: :completed,
-                 created_by: back_office)
+Campaign.where(title: "New bank card launch - 2020").
+  first_or_create!(description: "Launch of new bank card product in Mar 2020 - 15000 cards",
+                   status: :completed,
+                   created_by: back_office)
 
-Campaign.create!(title: "Red Card Launch - Jan 2021",
-                 description: "New Red Card launch",
-                 status: :open,
-                 created_by: back_office)
+Campaign.where(title: "Red Card Launch - Jan 2021").
+  first_or_create!(description: "New Red Card launch",
+                   status: :open,
+                   created_by: back_office)
 
-Campaign.create!(title: "Blue Card Launch - Feb 2021",
-                 description: "New Blue Card launch",
-                 status: :open,
-                 created_by: back_office)
+Campaign.where(title: "Blue Card Launch - Feb 2021").
+  first_or_create!(description: "New Blue Card launch",
+                   status: :open,
+                   created_by: back_office)

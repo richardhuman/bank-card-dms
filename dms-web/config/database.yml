@@ -20,8 +20,8 @@ default: &default
 development:
   <<: *default
   database: rails_dms_web_development
-  username: <%= ENV["BC_DMS_RAILS_DB_USERNAME"] || Rails.application.credentials.database[:username] || "root" %>
-  password: <%= ENV["BC_DMS_RAILS_DB_PASSWORD"] || Rails.application.credentials.database[:password] || "password "%>
+  username: <%= ENV["BC_DMS_RAILS_DB_USERNAME"] || Rails.application.credentials.database.try(:[], :username) || "root" %>
+  password: <%= ENV["BC_DMS_RAILS_DB_PASSWORD"] || Rails.application.credentials.database.try(:[], :password) || "password "%>
 
 
 # Warning: The database defined as "test" will be erased and
@@ -30,8 +30,8 @@ development:
 test:
   <<: *default
   database: rails_dms_web_test
-  username: <%= ENV["BC_DMS_RAILS_DB_USERNAME"] || Rails.application.credentials.database[:username] || "root" %>
-  password: <%= ENV["BC_DMS_RAILS_DB_PASSWORD"] || Rails.application.credentials.database[:password] || "password "%>
+  username: <%= ENV["BC_DMS_RAILS_DB_USERNAME"] || Rails.application.credentials.database.try(:[], :username) || "root" %>
+  password: <%= ENV["BC_DMS_RAILS_DB_PASSWORD"] || Rails.application.credentials.database.try(:[], :password) || "password "%>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -55,6 +55,6 @@ test:
 #
 production:
   <<: *default
-  database: dms_web_production
-  username: dms_web
-  password: <%= ENV['DMS_WEB_DATABASE_PASSWORD'] %>
+  database: <%= ENV["BC_DMS_RAILS_DB_NAME"] %>
+  username: <%= ENV["BC_DMS_RAILS_DB_USERNAME"] %>
+  password: <%= ENV['BC_DMS_RAILS_DB_PASSWORD'] %>
