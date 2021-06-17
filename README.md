@@ -5,7 +5,7 @@
 This is a prototype / proof-of-concept app for a Fintech company that services customers
 in developing markets. This market is characterised by companies not having formal agreements
 or relationships with their customers. For this reason, the company wishes to introduce, what
-can be characterised as, a more conventional bank card, which will allow their customers to access
+can be characterised as, a more conventional bank card which will allow their customers to access
 their suite of products.
 
 The distribution of these bank cards to end users is done via an informal network of sales agents
@@ -44,8 +44,8 @@ that allows for the following functions:
 * Load bundles of cards onto the system and assign them to campaigns.
 * Create accounts for sales agents (users) that they have direct relationship with.
 * Users must activate their own accounts on receipt of an activation / invitation SMS or email. 
-* Users can be uniquely identified by either a mobile number or email. The vast majority will
-  use a mobile number most likely.
+* Users can be uniquely identified by either a mobile number or email. The vast majority will 
+  most likely use a mobile number.
 * Release (assign) bundles to the first tier of sales agents.
 * Have a dashboard view of how a campaign is performing.
 * Detailed reporting of a campaign including breakdown by sales agent (and that sales agent's network).
