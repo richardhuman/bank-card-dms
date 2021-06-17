@@ -6,14 +6,20 @@ back_office_user:
   password_digest: <%= BCrypt::Password.create('password') %>
   first_name: Backoffice
   surname: User
-  deleted_at:
   user_role: 10
 
-sales_agent_1:
-  email: agent.user.1@company.com
-  mobile_number: 0820000002
+sales_agent_1_1:
+  email: agent.1@sales1.com
+  mobile_number: 0720000002
   password_digest: <%= BCrypt::Password.create('password') %>
-  first_name: Sales
-  surname: Agent 1
-  deleted_at:
+  first_name: Sales 1 - Agent 2
+  surname:
+  user_role: 20
+
+sales_agent_1_2:
+  email: agent.2@sales1.com
+  mobile_number: 0720000003
+  password_digest: <%= BCrypt::Password.create('password') %>
+  first_name: Sales 1 - Agent 2
+  surname:
   user_role: 20

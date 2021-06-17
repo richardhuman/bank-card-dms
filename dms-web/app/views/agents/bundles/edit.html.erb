@@ -10,9 +10,11 @@
         </div>
     </div>
 
-    <% disabled = @bundle_sale_action.nil? %>
     <div class="content-section">
-        <%= form_with(model: @bundle_sale_action, url: agents_bundle_path(@bundle), method: :patch) do |form| %>
+        <% disabled = @bundle_sale_action.nil? %>
+        <%= form_with(model: @bundle_sale_action,
+                      url: agents_bundle_path(@bundle),
+                      method: :patch) do |form| %>
             <%= render "shared/form_errors", active_model_object: @bundle_sale_action %>
             <div class="row-flex">
                 <div>
@@ -29,8 +31,34 @@
 
     <div class="content-section">
         <% disabled = @bundle_transfer_action.nil? %>
-        <%= form_with(model: @bundle_transfer_action, url: agents_bundle_path(@bundle), method: :patch, class: ('disabled' if disabled)) do |form| %>
+        <%= form_with(model: @bundle_transfer_action,
+                      url: agents_bundle_path(@bundle),
+                      method: :patch,
+                      class: ('disabled' if disabled)) do |form| %>
             <%= render "shared/form_errors", active_model_object: @bundle_transfer_action %>
+            <div class="row-flex">
+                <div>
+                    <%= form.label :transferee_id %>
+                    <%= form.collection_select :transferee_id, @sub_agents, :id, :full_name_with_identifier,
+                                               { include_blank: true }, { disabled: disabled } %>
+                </div>
+                <div class="form-actions">
+                    <%= form.hidden_field :action %>
+                    <%= form.submit t("forms.bundle.actions.transfer"), name: :transfer, class: "button button-primary",
+                                    disabled: disabled,
+                                    data: { confirm: t("forms.bundle.confirmations.transfer") } %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="content-section">
+        <% disabled = @bundle_split_transfer_action.nil? %>
+        <%= form_with(model: @bundle_split_transfer_action,
+                      url: agents_bundle_path(@bundle),
+                      method: :patch,
+                      class: ('disabled' if disabled)) do |form| %>
+            <%= render "shared/form_errors", active_model_object: @bundle_split_transfer_action %>
             <div class="row-flex">
                 <div>
                     <%= form.label :quantity, t("activemodel.attributes.bundle_action.transfer_quantity") %>
@@ -45,7 +73,7 @@
                     <%= form.hidden_field :action %>
                     <%= form.submit t("forms.bundle.actions.transfer"), name: :transfer, class: "button button-primary",
                                     disabled: disabled,
-                                    data: { confirm: t("forms.bundle.confirmations.transfer") } %>
+                                    data: { confirm: t("forms.bundle.confirmations.split_transfer") } %>
                 </div>
             </div>
         <% end %>

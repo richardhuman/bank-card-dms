@@ -6,9 +6,12 @@ class BundleAction
 
   attr_accessor :bundle, :action, :quantity, :transferee_id
 
-  validates :quantity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :transferee_id, presence: true, if: :transfer_action?
-  validate :check_quantity_against_bundle, if: :sale_action?
+  ACTIONS = [:sale, :transfer, :split_transfer]
+
+  validates :action, inclusion: ACTIONS.collect(&:to_s), presence: true
+  validates :quantity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: proc { self.sale_action? || self.split_transfer_action? }
+  validates :transferee_id, presence: true, if: proc { self.transfer_action? || self.split_transfer_action? }
+  validate :check_quantity_against_bundle, if: proc { self.sale_action? || self.split_transfer_action? }
 
   class << self
     def new_sale_action(bundle)
@@ -19,16 +22,18 @@ class BundleAction
       BundleAction.new(action: :transfer, bundle: bundle)
     end
 
-    def new_actions_for_agent_map(bundle)
-      { sale: new_sale_action(bundle), transfer: new_transfer_action(bundle) }
+    def new_split_transfer_action(bundle)
+      BundleAction.new(action: :split_transfer, bundle: bundle)
     end
   end
 
   def execute!
     if sale_action?
       handle_sale!
-    elsif transfer_action?
+    elsif split_transfer_action?
       handle_split_transfer!
+    elsif transfer_action?
+      handle_transfer!
     else
       raise ApplicationError.new(message: "Unknown bundle action: #{action} for bundle #{bundle.id}", user: current_user)
     end
@@ -46,7 +51,12 @@ class BundleAction
     self.action.to_sym == :transfer
   end
 
+  def split_transfer_action?
+    self.action.to_sym == :split_transfer
+  end
+
   private
+
     def check_quantity_against_bundle
       if self.quantity.to_i > self.bundle.current_quantity.to_i
         errors.add(:sale_quantity, I18n.t("activemodel.errors.models.bundle_action.invalid_sale_quantity"))
@@ -60,6 +70,22 @@ class BundleAction
                                      executed_by: bundle.current_assignee,
                                      quantity: self.quantity.to_i)
       self.bundle.save!
+    end
+
+    def handle_transfer!
+      ApplicationRecord.transaction do
+        self.bundle.transactions.create!(transaction_type: :transfer,
+                                         logged_by: current_user,
+                                         executed_by: bundle.current_assignee,
+                                         transferee_id: self.transferee_id,
+                                         quantity: self.bundle.current_quantity,
+                                         description: ["Complete transfer of bundle #{self.bundle.bundle_number}",
+                                                      "to new #{User.find(self.transferee_id).default_name}",
+                                                      "(ID: #{self.transferee_id})"].join(" "))
+
+        self.bundle.current_assignee_id = self.transferee_id
+        self.bundle.save!
+      end
     end
 
     def handle_split_transfer!
@@ -78,18 +104,22 @@ class BundleAction
                                     released: true)
 
         self.bundle.transactions.create!(transaction_type: :transfer,
+                                         logged_by: current_user,
+                                         executed_by: bundle.current_assignee,
+                                         transferee_id: self.transferee_id,
+                                         quantity: self.quantity.to_i,
+                                         description: ["Transfer of #{self.quantity} units",
+                                                       "from bundle #{self.bundle.bundle_number}",
+                                                       " to new bundle #{new_bundle.bundle_number}"].join(" "))
+
+        new_bundle.transactions.create!(transaction_type: :transfer,
                                         logged_by: current_user,
                                         executed_by: bundle.current_assignee,
                                         transferee_id: self.transferee_id,
                                         quantity: self.quantity.to_i,
-                                        description: "Transfer of #{self.quantity} units from bundle #{self.bundle.bundle_number} to new bundle #{new_bundle.bundle_number}")
-
-        new_bundle.transactions.create!(transaction_type: :transfer,
-                                       logged_by: current_user,
-                                       executed_by: bundle.current_assignee,
-                                       transferee_id: self.transferee_id,
-                                       quantity: self.quantity.to_i,
-                                       description: "Transfer of #{self.quantity} units from bundle #{self.bundle.bundle_number} to new bundle #{new_bundle.bundle_number}")
+                                        description: ["Transfer of #{self.quantity} units",
+                                                      "from bundle #{self.bundle.bundle_number}",
+                                                      "to new bundle #{new_bundle.bundle_number}"].join(" "))
       end
     end
 end

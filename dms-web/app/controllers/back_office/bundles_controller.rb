@@ -33,8 +33,12 @@ class BackOffice::BundlesController < BackOffice::BaseController
   end
 
   def destroy
-    @bundle.handle_delete!
-    redirect_to back_office_bundles_url, notice: I18n.t("forms.bundle.notices.delete")
+    if @bundle.can_be_destroyed?
+      @bundle.destroy
+      redirect_to back_office_bundles_url, notice: I18n.t("forms.bundle.notices.delete")
+    else
+      redirect_to back_office_bundles_url, alert: I18n.t("forms.bundle.alerts.delete")
+    end
   end
 
   private

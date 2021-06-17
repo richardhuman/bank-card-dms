@@ -10,6 +10,8 @@ class BundleTransaction < ApplicationRecord
   scope :reverse_chronologically, ->() { order(created_at: :desc) }
   scope :recent_transactions, -> () { reverse_chronologically.includes(:logged_by, :executed_by, :transferee, bundle: :campaign).limit(10) }
 
+  # TODO: What is the best way to implement this? It feels like the partial to select should be a concern
+  #       elsewhere. And also preparing of the data - it's currently executed directly in the partial.
   after_create_commit -> { broadcast_replace_later_to "broadcast_dashboard_bundle_transactions",
                                                       target: "dashboard_bundle_transactions",
                                                       partial: "back_office/dashboard/recent_transactions" }

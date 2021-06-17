@@ -1,13 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-#one:
-#  bundle_number: MyString
-#  current_assignee: one
-#  loaded_by: one
-#  loaded_at: 2021-06-04 08:53:48
-#
-#two:
-#  bundle_number: MyString
-#  current_assignee: two
-#  loaded_by: two
-#  loaded_at: 2021-06-04 08:53:48
+bundle_campaign_1_released_1:
+  bundle_number: 100.1
+  campaign: campaign_launch
+  creation_mode: 1 # loaded
+  current_quantity: 100
+  initial_quantity: 100
+  loaded_by: back_office_user
+  loaded_at: 2021-06-04 08:53:48
+  status: 10 # released
+  current_assignee: sales_agent_1_1
+  released: true
+
+
+
